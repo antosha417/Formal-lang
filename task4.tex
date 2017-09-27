@@ -1,0 +1,387 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\o\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Задача  4.}
+1) Язык $L$ получен пересечением регулярного языка $b^*$, регулярного языка $aa^+b^*$, для которых лемма о накачке выполняется, и языка  $B, B = \{ab^p|p \in PRIMES\}$. Докажем, что лемма о накачке выполняется для языка $B$. 
+
+$\forall \o \in B \ \exists N = 2: \o = x\cdot y\cdot z, x = \eps, y = a, |xy|<N$\\\hspace*{2.5cm}$\hookrightarrow \forall i \geq 1, x \cdot y^i \cdot z = a^i\cdot b^p \in aa^+b.$
+
+2) Докажем теперь, что язык $L$ не регулярный. Пусть $p_1$ и $p_2$ два последовательных простых числа, $p_2 > p_1$. Пусть $ab^i \sim ab^j$, и $j > i,\\ i< p_1;\ j - i < p_2 - p_1; i, j$ -- составные числа. Тогда возьмём $z = b^{p_1 - i}$.\\
+Получим: $ab^iz=ab^{p_1} \in L, ab^jz = ab^{p_1 + j-i} \notin L$, т.к. $p_1 + j - i < p_2$\\ Так как пар последовательных простых чисел разность которых больше двух бесконечное множество, то мы доказали что в языке $L$ бесконечное количество классов эквивалентности. По теореме Майхилла-Нероуда это означает, что язык не регулярный.
+
+
+\section*{Задача  5.}
+Так как $L = L_1 \cup R$, то $L_1 = (L \setminus R) \cup (L_1 \cap R)$. $(L_1 \cap R)$ конечно, так как $R$ конечно. язык $(L \setminus R)$ регулярный так как $L, R$ регулярные и регулярные языки замкнуты отностительно разности. Получаем, что  $L_1$ это объединение регулярного языка и конечного.
+
+\section*{Задача  6.}
+
+Доопределим автомат $\A$, добавив в него состояние $D$. Получим такой автомат:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (15.3,-23) circle (3);
+\draw (15.3,-23) node {$q_0$};
+\draw [black] (29.2,-23) circle (3);
+\draw (29.2,-23) node {$q_1$};
+\draw [black] (29.2,-23) circle (2.4);
+\draw [black] (43.1,-23) circle (3);
+\draw (43.1,-23) node {$q_2$};
+\draw [black] (54.7,-23) circle (3);
+\draw (54.7,-23) node {$q_3$};
+\draw [black] (54.7,-23) circle (2.4);
+\draw [black] (34.3,-39.2) circle (3);
+\draw (34.3,-39.2) node {$D$};
+\draw [black] (7.9,-23) -- (12.3,-23);
+\fill [black] (12.3,-23) -- (11.5,-22.5) -- (11.5,-23.5);
+\draw [black] (18.3,-23) -- (26.2,-23);
+\fill [black] (26.2,-23) -- (25.4,-22.5) -- (25.4,-23.5);
+\draw (22.25,-23.5) node [below] {$a$};
+\draw [black] (32.2,-23) -- (40.1,-23);
+\fill [black] (40.1,-23) -- (39.3,-22.5) -- (39.3,-23.5);
+\draw (36.15,-22.5) node [above] {$b$};
+\draw [black] (46.1,-23) -- (51.7,-23);
+\fill [black] (51.7,-23) -- (50.9,-22.5) -- (50.9,-23.5);
+\draw (48.9,-23.5) node [below] {$b$};
+\draw [black] (17.024,-20.547) arc (141.17218:38.82782:23.075);
+\fill [black] (52.98,-20.55) -- (52.86,-19.61) -- (52.08,-20.24);
+\draw (35,-11.44) node [above] {$b$};
+\draw [black] (40.605,-24.647) arc (-64.7892:-115.2108:10.459);
+\fill [black] (31.7,-24.65) -- (32.21,-25.44) -- (32.63,-24.54);
+\draw (36.15,-26.14) node [below] {$a$};
+\draw [black] (32.172,-37.092) arc (-140.30314:-184.74731:15.447);
+\fill [black] (32.17,-37.09) -- (32.05,-36.16) -- (31.28,-36.8);
+\draw (28.56,-32.51) node [left] {$a$};
+\draw [black] (54.583,-25.993) arc (-7.62637:-95.46621:15.962);
+\fill [black] (37.24,-39.76) -- (37.99,-40.34) -- (38.09,-39.34);
+\draw (50.64,-36.87) node [below] {$a,\mbox{ }b$};
+\draw [black] (33.088,-41.931) arc (3.80557:-284.19443:2.25);
+\draw (28.56,-44.96) node [left] {$a,\mbox{ }b$};
+\fill [black] (31.39,-39.9) -- (30.56,-39.45) -- (30.63,-40.45);
+\end{tikzpicture}
+\end{center}
+
+Множество вершин $Q$ делится на 2 части: принимающие и непринимающие. $Q = \{q_0, q_2, D| q_1, q_3\}$. Если рассматривать теперь переходы по букве $a$, то $q_0, q_2$ переходят в один класс, а $D$ в другой. То есть они в разных классах. Таким образом $Q  = \{q_0, q_2 | D | q_1, q_3\}$. Рассмотрим теперь переходы по букве $b$. Заметим, что $q_1$ и $q_3$ переходят в разные классы по этой букве, значит они не лежат в одном классе. Получаем $Q = \{q_0, q_2 | D | q_1|q_3\}$. Теперь члены одного класса по одной букве переходят в один и тот же класс.\\ Построим минимальный ДКА:  
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (14,-23.6) circle (3);
+\draw (14,-23.6) node {$q_0,q_2$};
+\draw [black] (25.6,-23.6) circle (3);
+\draw (25.6,-23.6) node {$q_1$};
+\draw [black] (25.6,-23.6) circle (2.4);
+\draw [black] (34.9,-23.6) circle (3);
+\draw (34.9,-23.6) node {$q_3$};
+\draw [black] (34.9,-23.6) circle (2.4);
+\draw [black] (7.1,-23.6) -- (11,-23.6);
+\fill [black] (11,-23.6) -- (10.2,-23.1) -- (10.2,-24.1);
+\draw [black] (16.455,-21.905) arc (114.11937:65.88063:8.186);
+\fill [black] (23.14,-21.91) -- (22.62,-21.12) -- (22.21,-22.03);
+\draw (19.8,-20.69) node [above] {$a$};
+\draw [black] (23.411,-25.619) arc (-59.4177:-120.5823:7.098);
+\fill [black] (16.19,-25.62) -- (16.62,-26.46) -- (17.13,-25.6);
+\draw (19.8,-27.11) node [below] {$b$};
+\draw [black] (15.684,-21.127) arc (138.40309:41.59691:11.721);
+\fill [black] (33.22,-21.13) -- (33.06,-20.2) -- (32.31,-20.86);
+\draw (24.45,-16.69) node [above] {$b$};
+\end{tikzpicture}
+\end{center}
+
+\section*{Задача  7.}
+
+Доопределим всюду автомат из предыдущей задачи путём добавления непринимающего состояния $D$.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (14,-23.6) circle (3);
+\draw (14,-23.6) node {$q_0,q_2$};
+\draw [black] (25.2,-23.6) circle (3);
+\draw (25.2,-23.6) node {$q_1$};
+\draw [black] (25.2,-23.6) circle (2.4);
+\draw [black] (33.7,-23.6) circle (3);
+\draw (33.7,-23.6) node {$q_3$};
+\draw [black] (33.7,-23.6) circle (2.4);
+\draw [black] (29.9,-35.3) circle (3);
+\draw (29.9,-35.3) node {$D$};
+\draw [black] (7.1,-23.6) -- (11,-23.6);
+\fill [black] (11,-23.6) -- (10.2,-23.1) -- (10.2,-24.1);
+\draw [black] (16.43,-21.872) arc (114.27232:65.72768:7.713);
+\fill [black] (22.77,-21.87) -- (22.25,-21.09) -- (21.84,-22);
+\draw (19.6,-20.69) node [above] {$a$};
+\draw [black] (23.048,-25.654) arc (-59.1261:-120.8739:6.719);
+\fill [black] (16.15,-25.65) -- (16.58,-26.49) -- (17.1,-25.64);
+\draw (19.6,-27.11) node [below] {$b$};
+\draw [black] (15.589,-21.067) arc (139.94048:40.05952:10.793);
+\fill [black] (32.11,-21.07) -- (31.98,-20.13) -- (31.21,-20.78);
+\draw (23.85,-16.72) node [above] {$b$};
+\draw [black] (27.807,-33.16) arc (-142.2695:-173.95891:12.96);
+\fill [black] (27.81,-33.16) -- (27.71,-32.22) -- (26.92,-32.83);
+\draw (25.29,-30.95) node [left] {$a$};
+\draw [black] (33.963,-26.581) arc (-1.95474:-34.03143:12.294);
+\fill [black] (31.86,-33.04) -- (32.73,-32.66) -- (31.9,-32.1);
+\draw (34.14,-30.64) node [right] {$a,b$};
+\draw [black] (32.201,-37.207) arc (78.08438:-209.91562:2.25);
+\draw (34.56,-41.98) node [below] {$a,\mbox{ }b$};
+\fill [black] (29.79,-38.29) -- (29.13,-38.97) -- (30.11,-39.17);
+\end{tikzpicture}
+\end{center}
+
+Построим автомат распознающий язык $\overline{L}$. Для этого сделаем все не принимающие состояния автомата принимающими, а непринимающие принимающими.\\ Получившийся автомат: 
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (14,-23.6) circle (3);
+\draw (14,-23.6) node {$Q_0$};
+\draw [black] (14,-23.6) circle (2.4);
+\draw [black] (25.1,-23.6) circle (3);
+\draw (25.1,-23.6) node {$Q_1$};
+\draw [black] (35.4,-23.6) circle (3);
+\draw (35.4,-23.6) node {$Q_2$};
+\draw [black] (29.9,-35.3) circle (3);
+\draw (29.9,-35.3) node {$D$};
+\draw [black] (29.9,-35.3) circle (2.4);
+\draw [black] (7.1,-23.6) -- (11,-23.6);
+\fill [black] (11,-23.6) -- (10.2,-23.1) -- (10.2,-24.1);
+\draw [black] (16.423,-21.864) arc (114.30689:65.69311:7.597);
+\fill [black] (22.68,-21.86) -- (22.15,-21.08) -- (21.74,-21.99);
+\draw (19.55,-20.69) node [above] {$a$};
+\draw [black] (22.957,-25.663) arc (-59.05502:-120.94498:6.626);
+\fill [black] (16.14,-25.66) -- (16.57,-26.5) -- (17.09,-25.65);
+\draw (19.55,-27.11) node [below] {$b$};
+\draw [black] (15.722,-21.153) arc (137.78499:42.21501:12.123);
+\fill [black] (33.68,-21.15) -- (33.51,-20.22) -- (32.77,-20.9);
+\draw (24.7,-16.68) node [above] {$b$};
+\draw [black] (27.793,-33.174) arc (-141.85798:-173.52961:13.032);
+\fill [black] (27.79,-33.17) -- (27.69,-32.24) -- (26.91,-32.85);
+\draw (25.24,-30.98) node [left] {$a$};
+\draw [black] (35.247,-26.59) arc (-9.29139:-41.06368:13.493);
+\fill [black] (32.1,-33.27) -- (33.01,-33) -- (32.25,-32.34);
+\draw (34.86,-31.2) node [right] {$a,b$};
+\draw [black] (32.201,-37.207) arc (78.08438:-209.91562:2.25);
+\draw (34.56,-41.98) node [below] {$a,\mbox{ }b$};
+\fill [black] (29.79,-38.29) -- (29.13,-38.97) -- (30.11,-39.17);
+\end{tikzpicture}
+\end{center}
+Таким образом, если исходный автомат на слове $\o$ закончил в принимающем состоянии, то в получившемся он закончит в непринимающем, и если исходный автомат не принимал слово $\o$, то получившийся его примет.
+
+Минимизируем получившийся автомат. Разделим множество состояний на 2 части: принимающие и непринимающие $Q = \{Q_0, D|Q_1, Q_2\}$. Рассмотрим теперь переходы по букве $a$, $Q_0$ переходит в один класс, а $D$ в другой. Таким образом $Q = \{Q_0| D|Q_1, Q_2\}$. Рассмотрим теперь переходы по букве $b$, $Q_1$ переходит в один класс, а $Q_2$ в другой. Таким образом $Q = \{Q_0| D|Q_1|Q_2\}$. Теперь члены одного класса по одной букве переходят в один и тот же класс.\\ Построим минимальный ДКА:  
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (14,-23.6) circle (3);
+\draw (14,-23.6) node {$Q_0$};
+\draw [black] (14,-23.6) circle (2.4);
+\draw [black] (25.1,-23.6) circle (3);
+\draw (25.1,-23.6) node {$Q_1$};
+\draw [black] (35.4,-23.6) circle (3);
+\draw (35.4,-23.6) node {$Q_2$};
+\draw [black] (29.9,-35.3) circle (3);
+\draw (29.9,-35.3) node {$D$};
+\draw [black] (29.9,-35.3) circle (2.4);
+\draw [black] (7.1,-23.6) -- (11,-23.6);
+\fill [black] (11,-23.6) -- (10.2,-23.1) -- (10.2,-24.1);
+\draw [black] (16.423,-21.864) arc (114.30689:65.69311:7.597);
+\fill [black] (22.68,-21.86) -- (22.15,-21.08) -- (21.74,-21.99);
+\draw (19.55,-20.69) node [above] {$a$};
+\draw [black] (22.957,-25.663) arc (-59.05502:-120.94498:6.626);
+\fill [black] (16.14,-25.66) -- (16.57,-26.5) -- (17.09,-25.65);
+\draw (19.55,-27.11) node [below] {$b$};
+\draw [black] (15.722,-21.153) arc (137.78499:42.21501:12.123);
+\fill [black] (33.68,-21.15) -- (33.51,-20.22) -- (32.77,-20.9);
+\draw (24.7,-16.68) node [above] {$b$};
+\draw [black] (27.793,-33.174) arc (-141.85798:-173.52961:13.032);
+\fill [black] (27.79,-33.17) -- (27.69,-32.24) -- (26.91,-32.85);
+\draw (25.24,-30.98) node [left] {$a$};
+\draw [black] (35.247,-26.59) arc (-9.29139:-41.06368:13.493);
+\fill [black] (32.1,-33.27) -- (33.01,-33) -- (32.25,-32.34);
+\draw (34.86,-31.2) node [right] {$a,b$};
+\draw [black] (32.201,-37.207) arc (78.08438:-209.91562:2.25);
+\draw (34.56,-41.98) node [below] {$a,\mbox{ }b$};
+\fill [black] (29.79,-38.29) -- (29.13,-38.97) -- (30.11,-39.17);
+\end{tikzpicture}
+\end{center}
+
+
+
+\section*{Задача  8.}
+
+Построим КМП-автомат для подслова $ab$:
+
+		\begin{itemize}
+		\item $Q = \{\; \eps,\; a,\; ab\}$;
+		\item $q_0 = \eps$;
+		\item $ \delta:$\\
+		\hspace*{0.5cm} $ \delta(\eps, a) = a$ \\
+		\hspace*{0.5cm} $ \delta(\eps, b) = \eps$ \\
+		\hspace*{0.5cm} $ \delta(a, a) = a$ \\
+		\hspace*{0.5cm} $ \delta(a, b) = ab$
+		\hspace*{0.5cm} $ \delta(ab, a) = ab$
+		\hspace*{0.5cm} $ \delta(ab, b) = ab$  
+		\item $F = \{ abaa \}$.
+	\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (18,-24.6) circle (3);
+\draw (18,-24.6) node {$\eps$};
+\draw [black] (29.4,-24.6) circle (3);
+\draw (29.4,-24.6) node {$a$};
+\draw [black] (41.7,-24.6) circle (3);
+\draw (41.7,-24.6) node {$ab$};
+\draw [black] (41.7,-24.6) circle (2.4);
+\draw [black] (21,-24.6) -- (26.4,-24.6);
+\fill [black] (26.4,-24.6) -- (25.6,-24.1) -- (25.6,-25.1);
+\draw (23.7,-25.1) node [below] {$a$};
+\draw [black] (32.4,-24.6) -- (38.7,-24.6);
+\fill [black] (38.7,-24.6) -- (37.9,-24.1) -- (37.9,-25.1);
+\draw (35.55,-25.1) node [below] {$b$};
+\draw [black] (40.779,-21.757) arc (225.67568:-62.32432:2.25);
+\draw (43.29,-17.26) node [above] {$a,b$};
+\fill [black] (43.4,-22.14) -- (44.31,-21.92) -- (43.6,-21.22);
+\draw [black] (9.3,-24.6) -- (15,-24.6);
+\fill [black] (15,-24.6) -- (14.2,-24.1) -- (14.2,-25.1);
+\draw [black] (16.677,-21.92) arc (234:-54:2.25);
+\draw (18,-17.35) node [above] {$b$};
+\fill [black] (19.32,-21.92) -- (20.2,-21.57) -- (19.39,-20.98);
+\draw [black] (28.077,-21.92) arc (234:-54:2.25);
+\draw (29.4,-17.35) node [above] {$a$};
+\fill [black] (30.72,-21.92) -- (31.6,-21.57) -- (30.79,-20.98);
+\end{tikzpicture}
+\end{center}
+
+Он всюду определён. Минимизируем получившийся автомат. Разделим множество состояний на 2 части: принимающие и непринимающие $Q = \{\eps, a| ab\}$. Рассмотрим теперь переходы по букве $b$: $\eps$ переходи в один класс, $a$ в другой, тогда получим $Q = \{\eps | a| ab\}$. Теперь члены одного класса по одной букве переходят в один и тот же класс.\\ Построим минимальный ДКА:  
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (18,-24.6) circle (3);
+\draw (18,-24.6) node {$\eps$};
+\draw [black] (29.4,-24.6) circle (3);
+\draw (29.4,-24.6) node {$a$};
+\draw [black] (41.7,-24.6) circle (3);
+\draw (41.7,-24.6) node {$ab$};
+\draw [black] (41.7,-24.6) circle (2.4);
+\draw [black] (21,-24.6) -- (26.4,-24.6);
+\fill [black] (26.4,-24.6) -- (25.6,-24.1) -- (25.6,-25.1);
+\draw (23.7,-25.1) node [below] {$a$};
+\draw [black] (32.4,-24.6) -- (38.7,-24.6);
+\fill [black] (38.7,-24.6) -- (37.9,-24.1) -- (37.9,-25.1);
+\draw (35.55,-25.1) node [below] {$b$};
+\draw [black] (40.779,-21.757) arc (225.67568:-62.32432:2.25);
+\draw (43.29,-17.26) node [above] {$a,b$};
+\fill [black] (43.4,-22.14) -- (44.31,-21.92) -- (43.6,-21.22);
+\draw [black] (9.3,-24.6) -- (15,-24.6);
+\fill [black] (15,-24.6) -- (14.2,-24.1) -- (14.2,-25.1);
+\draw [black] (16.677,-21.92) arc (234:-54:2.25);
+\draw (18,-17.35) node [above] {$b$};
+\fill [black] (19.32,-21.92) -- (20.2,-21.57) -- (19.39,-20.98);
+\draw [black] (28.077,-21.92) arc (234:-54:2.25);
+\draw (29.4,-17.35) node [above] {$a$};
+\fill [black] (30.72,-21.92) -- (31.6,-21.57) -- (30.79,-20.98);
+\end{tikzpicture}
+\end{center}
+
+
+\end{document}

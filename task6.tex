@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%date{05 октября 2016 г.}
+\let\ra\rightarrow
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\o\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Задача  1.}
+В решении используется теория из книги "А. Ахо, Дж. Ульман Теория Синтаксического анализа, перевода и компиляции".\\
+1. Это уравнение имет вид $X = \alpha X + \beta$. где $\alpha = (101)^*+110^*, \beta = \varnothing$.
+\hspace*{1cm}1) Частное решение этого уравнения: $\alpha^* \cdot \beta = \varnothing.$\\
+\hspace*{1cm}2) Минимальное по включению решение: $\alpha^* \cdot \beta = \varnothing.$\\
+\hspace*{1cm}3) Так как $\eps \in L(\alpha)$, то все решения: $\alpha^* \cdot (\beta + \gamma) = \alpha^* \cdot \gamma\  \forall\ \gamma.$\\
+
+2.  Это уравнение имет вид $X = \alpha X + \beta$. где\\ \hspace*{1,5cm}
+ $\alpha = 00 + 01 + 10 + 11, \beta = 0 + 1 + \eps$. \\
+\hspace*{1cm}1) Частное решение этого уравнения:\\ \hspace*{1,5cm}$\alpha \cdot \beta = (00 + 01 + 10 + 11)^*\cdot (0 + 1 + \eps).$\\
+\hspace*{1cm}2) Минимальное по включению решение:\\ \hspace*{1,5cm}$\alpha^* \cdot \beta = (00 + 01 + 10 + 11)^*\cdot (0 + 1 + \eps).$\\
+\hspace*{1cm}3) Так как $\eps \notin L(\alpha)$, то все решения:\\ \hspace*{1,5cm}$\alpha^* \cdot \beta = (00 + 01 + 10 + 11)^*\cdot (0 + 1 + \eps).$\\
+
+3. Пусть $q_0, q_1, q_2$ это перевёрнутые $Q_0, Q_1, Q_2.$ Тогда система примет вид:\\
+	$
+	\left\{
+	\begin{array}{rcl}
+	q_0&=& 0 q_0 + 1 q_1 +\varepsilon \\
+	q_1&=& 1 q_0 + 0 q_2\\
+	q_2&=& 0 q_1 + 1 q_2\\
+	\end{array}
+	\right.
+	$\\
+	Из последнего уравнения выразим $q_2$ и подставим во второе. \\
+	$
+	\left\{
+	\begin{array}{rcl}
+	q_0&=& 0 q_0 + 1 q_1 +\varepsilon \\
+	q_1&=& 1 q_0 + 0 1^*0 q_1\\
+	q_2&=& 1^* \cdot 0 q_1\\
+	\end{array}
+	\right.
+	$\\
+	Из второго уравнения выразим $q_1$ и подставим впервое. \\
+	$
+	\left\{
+	\begin{array}{rcl}
+	q_0&=& (0 + 1 1 (01^*0)^*1)q_0 +\varepsilon \\
+	q_1&=& (01^*0)^*1q_0\\
+	q_2&=& 1^* \cdot 0 q_1\\
+	\end{array}
+	\right.
+	$\\
+	Решим систему уравнений.\\
+	$
+	\left\{
+	\begin{array}{rcl}
+	q_0&=& (0 + 1 (01^*0)^*1)^* \\
+	q_1&=& (01^*0)^*1(0 + 1 (01^*0)^*1)^*\\
+	q_2&=& 1^*0(01^*0)^*1(0 + 1 (01^*0)^*1)^*.\\
+	\end{array}
+	\right.
+	$\\
+	Вернёмся к исходным переменным.\\
+	$
+	\left\{
+	\begin{array}{rcl}
+	Q_0&=& (0 + 1 (01^*0)^*1)^* \\
+	Q_1&=& (0 + 1 (01^*0)^*1)^*1(01^*0)^*\\
+	Q_2&=& (0 + 1 (01^*0)^*1)^*1(01^*0)^*01^*.\\
+	\end{array}
+	\right.
+	$\\
+	Мы нашли частное, минимальное по включению, и все решения.
+
+
+\section*{Задача  2.}
+Определим грамматику $G$ так: $S \ra aSb\ |\ \eps$. Она линейна по определению. $L(G) = \{a^nb^n\}$. $L(G)$ нерегулярный язык. Значит утверждение не верно.
+\section*{Задача  3.}
+1.Покажим индукцией по длине слова, что КС-грамматика $G$ с правила-
+ми $S \ra SS\ |\ aSb\ |\ bSa\ |\ \eps$ порождает язык $L^=$.\\
+Докажем, что $L^= \subseteq L(G)$.\\
+1) База: $\eps \in L(G),$ так как $S \ra e$. \\
+\hspace*{0,5cm}$ab \in L(G),$ так как $S\ra aSb \ra ab$.\\
+\hspace*{0,5cm}$ba \in L(G),$ так как $S\ra bSa \ra ba$.\\
+2) Пусть все слова из $L^=$ длины меньшей или равной $n$ выводимы из грамматики $G$.\\
+Рассмотрим слово  $\o \in L^=$ длины $n+2$.Представим $\o$ в виде $a\o_1b\o_2$ или $b\o_1a\o_2$, где $\o_1$ и $\o_2$ слова длины меньшей $n+2$, и $\o_1 \in L^=$. По предположению индукции $S \vdash^*\o_1$. $S \vdash^*\o_2$. Тогда $\o$ выводимо, так как $S \ra SS \ra aSbS$ и $S \ra SS \ra bSaS.$
+
+
+Докажем, что $L(G) \subseteq L^=$.\\
+1) База: $\eps \in L^=$, $ab \in L^=$, $ba \in L^=$.\\
+2) Пусть все слова длины меньшей или равной $n$ выводимые из грамматики $G$  лежат в $ L^=$.\\ Тогда слово длины $n+2$ лежит в $L^=$, так как оно получилось приминением ещё один раз правила $S \ra aSb\ |\ bSa$ на любом этапе вывода слова длины $n$. \\
+
+2. Нелинейность нужна чтобы выести,например, слова из последовательности $\{a^nb^na^nb^n\}$. Иначе потребуется бесконечное число правил вывода.
+
+\section*{Задача  4.}
+Построим граматику для языка неполиндромов:\\
+$S \ra aTb\ |\ bTa\ |\ aMa\ |\ bMb$\\
+$T \ra TaT\ |\ TbT\ |\ \eps$\\
+$M \ra aTb\ |\ bTa\ |\ aMa\ |\ bMb$\\
+Из нетерминала $T$ можно вывести любое слово.\\
+Нетерминалы $S$ и $M$ задают слово от концов к середине. Тогда и только тогда когда будет выбрано правило вида $B \ra aAb$ или $B \ra bAa$, полученное слово будет являтся непалиндромом. Вывод может быть закончен только если будет выбрано правило упомянутого вида.\\ Таким образом по правилам могут быть выведены только непалиндромы. Причём всё, так как до нарушения палиндромности (если идти от концов к началу) $a$ и $b$ могут чередоваться как угодно, за это отвечает нетерминал $M$. А после нарушения палиндромности из нетерминала $T$ может быть выведено всё что угодно.
+
+\end{document}

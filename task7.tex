@@ -1,0 +1,226 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%date{05 октября 2016 г.}
+\let\ra\rightarrow
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\o\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Задача  1.}
+1) Построим автомат по такому принципу:\\
+\hspace*{1cm} a) начальное состояние принимающее так как $\epsilon$ лежит в языке.\\
+\hspace*{1cm} b) если на стеке только $Z_0$ кладём букву из слова на стек.\\
+\hspace*{1cm} c) если следующая буква $\sigma$ противоположна той что лежит на стеке($\lambda$), то убрием $\lambda$ со стека. Если же $\sigma = \lambda$, то кладём на стек $\sigma\lambda$. \\
+\hspace*{1cm} d) Если букв $a$ и букв $b$ в слове одинаковое количество, то повтряя пункты b и c мы обработаем всё слово и на стеке останется только $Z_0$. Уберём $Z_0$ со стека и перейдём в конечное состояние.\\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,every node/.style={text centered},initial text=]
+	\node [state, initial, accepting] (q_0) {$q_0$};
+	\node [state] (q_1) [right = 4cm of q_0] {$q_1$};
+	\node [state, accepting] (q_2) [right = 4cm of q_1] {$q_2$};
+	\path[->]
+		
+		(q_1) edge [in=-30,out=-150,loop] node [below] {$b,b/bb\ b,a/\eps\ b,Z_0/bZ_0$} (q_0)
+			  edge [in=30,out=150,loop] node {$a,a/aa\ a, b/\eps\ a,Z_0/aZ_0$} (q_0)
+			  edge node {$\eps, Z_0/\epsilon$} (q_2)
+		(q_0) edge node {$a,Z_0/aZ_0$} (q_1)
+			  edge node [below] {$b,Z_0/bZ_0$} (q_1)
+			  
+;\end{tikzpicture}\\
+
+
+\section*{Задача  2.}
+1) Построим автомат по такому принципу:\\
+\hspace*{1cm} a) начальное состояние принимающее так как $\epsilon$ лежит в языке.\\
+\hspace*{1cm} b) если на стеке только $Z_0$ кладём букву из слова на стек.\\
+\hspace*{1cm} c) если следующая буква $\sigma$ закрывающая скобка а на стеке лежит открывающая такого же типа $\lambda$, то убрием $\lambda$ со стека. Если же $\sigma$ открывающая скобка, то кладём её на стек. \\
+\hspace*{1cm} d) Если если слово это правильна скобочная последовательность, то повтряя пункты b и c мы обработаем всё слово и на стеке останется только $Z_0$. Уберём $Z_0$ со стека и перейдём в конечное состояние.\\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,every node/.style={text centered},initial text=]
+	\node [state, initial, accepting] (q_0) {$q_0$};
+	\node [state] (q_1) [right = 4cm of q_0] {$q_1$};
+	\node [state, accepting] (q_2) [right = 4cm of q_1] {$q_2$};
+	\path[->]
+		(q_0) edge node {$(,Z_0/(Z_0$} (q_1)
+			  edge node [below] {$[,Z_0/[Z_0$} (q_1)
+		(q_1) edge [in=-30,out=-150,loop] node [below] {$(,\eps/(\ \ ),(/\eps$} (q_1)
+			  edge [in=30,out=150,loop] node {$[,\eps/[\ \ ], [/\eps$} (q_1)
+			  edge node [below] {$\eps,Z_0/\eps$} (q_2)
+;\end{tikzpicture}\\
+
+
+\section*{Задача  3.}
+
+1. Состояние $q_0$ принимающее, так как $\epsilon\in L$;
+
+2. Если длина слова 1, то переходим в принимающее состояние $q_3$;
+
+3. Если длина слова больше 1, то по первой букве перейдем в состояние $q_1$, и пока не достигнем позиции $[\dfrac{|\omega|}{2}] + 1$, будем класть буквы слова в стек. 
+
+4. Если длина слова делится на 2, то из состояния $q_1$ переходим в $q_2$, убирая со стека букву, если она равна обрабатываемой. Если длина слова нечетна, то переходим, не изменяя стек.
+
+5. Если очередная буква в обрабатываемом слове равна той, что лежит на вершине стека, то убираем букву со стека.
+
+6. Если после проделанных операций в стеке остался только символ $Z_0$, то переходим в принимающее состояние. Если в стеке осталось что-то еще, то слово было не палиндромом и автомат его не примет.
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,every node/.style={text centered},initial text=]
+	\node [state, initial, accepting] (q_0) {$q_0$};
+	\node [state] (q_1) [right = 4cm of q_0] {$q_1$};
+	\node [state] (q_2) [right = 4cm of q_1] {$q_2$};
+	\node [state, accepting] (q_3) [right = 4cm of q_2] {$q_3$};
+	\path[->]
+		(q_0) edge node {$a,Z_0/aZ_0$} (q_1)
+			  edge node [below] {$b,Z_0/bZ_0$} (q_1)
+			  edge [in=130,out=50] node [below] {$a, Z_0/\eps\ \ b,Z_0/\epsilon$} (q_3)
+		(q_1) edge [in=30,out=150,loop] node {$a, \eps / a\ \ b, \eps / b$} (q_1)
+			  edge node [below] {$a,a/\eps\ \ b, b/\eps$} (q_2)
+			  edge node {$a,\eps/\eps\ \ b, \eps/\eps$} (q_2)
+		(q_2) edge node {$\eps, Z_0/\epsilon$} (q_3)
+			  edge [in=30,out=150,loop] node {$a,a/\eps\ \ b, b/\eps$} (q_2)
+;\end{tikzpicture}\\
+
+
+\section*{Задача  4.}
+1. $L = \{a^nb^nc^k, \forall n, k \geq 0 \} \cup \{a^nb^kc^n, \forall n, k \geq 0 \}$
+
+	$S \ra AB\ |\ C$
+	
+	$A\ra aAb\ |\ \eps$
+	
+	$B\ra cB\ |\ \epsilon$ 
+	
+	$C\ra aCc\ |\ D$
+	
+	$D\ra bD\ |\ \epsilon$
+	
+	Из правила $S \ra AB$ получается любое слово вида $a^nb^nc^k$. Для этого нужно $n$ раз применить правило $A\ra aAb$, потом правило $A\ra \epsilon$.  Затем $k$ раз применить правило $B\ra cB$, потом правило $B\ra \epsilon$.
+		
+	Из правила $S \ra C$ получается любое слово вида $a^nb^kc^n$. Для этого нужно $n$ раз применить правило $C\ra aCc$, потом правило $C\ra D$.  Затем $k$ раз применить правило $D\ra bD$, потом правило $D\ra \epsilon$.
+
+\section*{Задача  5.}
+Воспользуемся алгоритмом из книги "Введение в теорию автоматов, языков и вычислений".
+В задаче 1 был построен автомат допускающий по принимающему состоянию.\\
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,every node/.style={text centered},initial text=]
+	\node [state, initial, accepting] (q_0) {$q_0$};
+	\node [state] (q_1) [right = 4cm of q_0] {$q_1$};
+	\node [state, accepting] (q_2) [right = 4cm of q_1] {$q_2$};
+	\path[->]
+		
+		(q_1) edge [in=-30,out=-150,loop] node [below] {$b,b/bb\ b,a/\eps\ b,Z_0/bZ_0$} (q_0)
+			  edge [in=30,out=150,loop] node {$a,a/aa\ a, b/\eps\ a,Z_0/aZ_0$} (q_0)
+			  edge node {$\eps, Z_0/\epsilon$} (q_2)
+		(q_0) edge node {$a,Z_0/aZ_0$} (q_1)
+			  edge node [below] {$b,Z_0/bZ_0$} (q_1)
+			  
+;\end{tikzpicture}\\
+Добавим в него состояние $q_3$ в которое будет переход из каждого принимающего состояния по $\eps$,  и будем опусташать стек в состоянии $q_3$.
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,every node/.style={text centered},initial text=]
+	\node [state, initial] (q_0) {$q_0$};
+	\node [state] (q_1) [right = 3.5cm of q_0] {$q_1$};
+	\node [state] (q_2) [right = 3.5cm of q_1] {$q_2$};
+	\node [state] (q_3) [right = 3.5cm of q_2] {$q_3$};
+	\path[->]
+		
+		(q_1) edge [in=-30,out=-150,loop] node [below] {$b,b/bb\ b,a/\eps\ b,Z_0/bZ_0$} (q_0)
+			  edge [in=30,out=150,loop] node {$a,a/aa\ a, b/\eps\ a,Z_0/aZ_0$} (q_0)
+			  edge node {$\eps, Z_0/\epsilon$} (q_2)
+		(q_0) edge node {$a,Z_0/aZ_0$} (q_1)
+			  edge node [below] {$b,Z_0/bZ_0$} (q_1)
+			  edge [in=100,out=85] node {$\eps,$ любой$/\eps$} (q_3)
+		(q_2) edge node {$\eps,$ любой$/\eps$} (q_3)
+		(q_3) edge [in=-60,out=-150,loop] node [below] {$\eps,$ любой$/\eps$} (q_3)
+			  
+;\end{tikzpicture}\\
+
+\end{document}

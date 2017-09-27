@@ -1,0 +1,772 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\om\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Задача 1.}
+Построим автомат $\A$, по регулярному выражению $a$.
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (16.3,-15) circle (3);
+\draw (16.3,-15) node {$q_{0}^{\A}$};
+\draw [black] (29.1,-15) circle (3);
+\draw (29.1,-15) node {$q_{F}^{A}$};
+\draw [black] (29.1,-15) circle (2.4);
+\draw [black] (8.5,-15) -- (13.3,-15);
+\fill [black] (13.3,-15) -- (12.5,-14.5) -- (12.5,-15.5);
+\draw [black] (19.3,-15) -- (26.1,-15);
+\fill [black] (26.1,-15) -- (25.3,-14.5) -- (25.3,-15.5);
+\draw (22.7,-14.5) node [above] {$a$};
+\end{tikzpicture}
+\end{center}
+Так же будет выглядеть автомат $\B$ по регулярному выражению $b$.\\
+
+Построим автомат $\C$ по регулярному выражению $a|b$.\\ $L(\C) = L(\A) \cup L(\B)$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (35.4,-19.2) circle (3);
+\draw (35.4,-19.2) node {$q_{0}^{\A}$};
+\draw [black] (49.8,-20.3) circle (3);
+\draw (49.8,-20.3) node {$q_{F}^{\A}$};
+\draw [black] (35.4,-38.8) circle (3);
+\draw (35.4,-38.8) node {$q_{0}^{\B}$};
+\draw [black] (49.8,-38.8) circle (3);
+\draw (49.8,-38.8) node {$q_{F}^{\B}$};
+\draw [black] (29.7,-29.6) circle (3);
+\draw (29.7,-29.6) node {$q_{0}^{\C}$};
+\draw [black] (54,-29.6) circle (3);
+\draw (54,-29.6) node {$q_{F}^{\C}$};
+\draw [black] (54,-29.6) circle (2.4);
+\draw [black] (37.276,-16.882) arc (130.1182:41.14525:7.887);
+\fill [black] (48.3,-17.72) -- (48.15,-16.79) -- (47.39,-17.45);
+\draw (43.07,-14.49) node [above] {$a$};
+\draw [black] (47.727,-40.948) arc (-53.87025:-126.12975:8.695);
+\fill [black] (47.73,-40.95) -- (46.79,-41.02) -- (47.38,-41.82);
+\draw (42.6,-43.12) node [below] {$b$};
+\draw [black] (31.14,-26.97) -- (33.96,-21.83);
+\fill [black] (33.96,-21.83) -- (33.14,-22.29) -- (34.01,-22.77);
+\draw (31.88,-23.21) node [left] {$\epsilon$};
+\draw [black] (31.28,-32.15) -- (33.82,-36.25);
+\fill [black] (33.82,-36.25) -- (33.82,-35.31) -- (32.97,-35.83);
+\draw (33.18,-32.91) node [right] {$\epsilon$};
+\draw [black] (51.03,-23.03) -- (52.77,-26.87);
+\fill [black] (52.77,-26.87) -- (52.89,-25.93) -- (51.98,-26.34);
+\draw (52.62,-23.94) node [right] {$\epsilon$};
+\draw [black] (51.05,-36.07) -- (52.75,-32.33);
+\fill [black] (52.75,-32.33) -- (51.97,-32.85) -- (52.88,-33.26);
+\draw (52.62,-35.22) node [right] {$\epsilon$};
+\draw [black] (20.5,-29.6) -- (26.7,-29.6);
+\fill [black] (26.7,-29.6) -- (25.9,-29.1) -- (25.9,-30.1);
+\end{tikzpicture}
+\end{center}
+
+Построим автомат $\D$ по регулярному выражению $a(a|b)$ \\ $L(\D) = L(\A) \cdot L(\C)$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (35.4,-19.2) circle (3);
+\draw (35.4,-19.2) node {$q_{0}^{\A}$};
+\draw [black] (49.8,-20.3) circle (3);
+\draw (49.8,-20.3) node {$q_{F}^{\A}$};
+\draw [black] (35.4,-38.8) circle (3);
+\draw (35.4,-38.8) node {$q_{0}^{\B}$};
+\draw [black] (49.8,-38.8) circle (3);
+\draw (49.8,-38.8) node {$q_{F}^{\B}$};
+\draw [black] (29.7,-29.6) circle (3);
+\draw (29.7,-29.6) node {$q_{0}^{\C}$};
+\draw [black] (54,-29.6) circle (3);
+\draw (54,-29.6) node {$q_{F}^{\D}$};
+\draw [black] (54,-29.6) circle (2.4);
+\draw [black] (19.1,-29.6) circle (3);
+\draw (19.1,-29.6) node {$q_{0}^{\D}$};
+\draw [black] (37.276,-16.882) arc (130.1182:41.14525:7.887);
+\fill [black] (48.3,-17.72) -- (48.15,-16.79) -- (47.39,-17.45);
+\draw (43.07,-14.49) node [above] {$a$};
+\draw [black] (47.727,-40.948) arc (-53.87025:-126.12975:8.695);
+\fill [black] (47.73,-40.95) -- (46.79,-41.02) -- (47.38,-41.82);
+\draw (42.6,-43.12) node [below] {$b$};
+\draw [black] (31.14,-26.97) -- (33.96,-21.83);
+\fill [black] (33.96,-21.83) -- (33.14,-22.29) -- (34.01,-22.77);
+\draw (31.88,-23.21) node [left] {$\epsilon$};
+\draw [black] (31.28,-32.15) -- (33.82,-36.25);
+\fill [black] (33.82,-36.25) -- (33.82,-35.31) -- (32.97,-35.83);
+\draw (33.18,-32.91) node [right] {$\epsilon$};
+\draw [black] (51.03,-23.03) -- (52.77,-26.87);
+\fill [black] (52.77,-26.87) -- (52.89,-25.93) -- (51.98,-26.34);
+\draw (52.62,-23.94) node [right] {$\epsilon$};
+\draw [black] (51.05,-36.07) -- (52.75,-32.33);
+\fill [black] (52.75,-32.33) -- (51.97,-32.85) -- (52.88,-33.26);
+\draw (52.62,-35.22) node [right] {$\epsilon$};
+\draw [black] (22.1,-29.6) -- (26.7,-29.6);
+\fill [black] (26.7,-29.6) -- (25.9,-29.1) -- (25.9,-30.1);
+\draw (24.4,-30.1) node [below] {$a$};
+\draw [black] (12.1,-29.6) -- (16.1,-29.6);
+\fill [black] (16.1,-29.6) -- (15.3,-29.1) -- (15.3,-30.1);
+\end{tikzpicture}
+\end{center}
+
+Построим автомат $\F$ по регулярному выражению $(a(a|b))^*$ \\ $L(\F) = L(\D)^*$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (35.4,-19.2) circle (3);
+\draw (35.4,-19.2) node {$q_{0}^{\A}$};
+\draw [black] (49.8,-20.3) circle (3);
+\draw (49.8,-20.3) node {$q_{F}^{\A}$};
+\draw [black] (35.4,-38.8) circle (3);
+\draw (35.4,-38.8) node {$q_{0}^{\B}$};
+\draw [black] (49.8,-38.8) circle (3);
+\draw (49.8,-38.8) node {$q_{F}^{\B}$};
+\draw [black] (29.7,-29.6) circle (3);
+\draw (29.7,-29.6) node {$q_{0}^{\C}$};
+\draw [black] (54,-29.6) circle (3);
+\draw (54,-29.6) node {$q_{F}^{\D}$};
+\draw [black] (19.1,-29.6) circle (3);
+\draw (19.1,-29.6) node {$q_{0}^{\D}$};
+\draw [black] (67.2,-29.6) circle (3);
+\draw (67.2,-29.6) node {$q_{F}^{F}$};
+\draw [black] (67.2,-29.6) circle (2.4);
+\draw [black] (8.5,-29.6) circle (3);
+\draw (8.5,-29.6) node {$q_{0}^{\F}$};
+\draw [black] (37.276,-16.882) arc (130.1182:41.14525:7.887);
+\fill [black] (48.3,-17.72) -- (48.15,-16.79) -- (47.39,-17.45);
+\draw (43.07,-14.49) node [above] {$a$};
+\draw [black] (47.727,-40.948) arc (-53.87025:-126.12975:8.695);
+\fill [black] (47.73,-40.95) -- (46.79,-41.02) -- (47.38,-41.82);
+\draw (42.6,-43.12) node [below] {$b$};
+\draw [black] (31.14,-26.97) -- (33.96,-21.83);
+\fill [black] (33.96,-21.83) -- (33.14,-22.29) -- (34.01,-22.77);
+\draw (31.88,-23.21) node [left] {$\epsilon$};
+\draw [black] (31.28,-32.15) -- (33.82,-36.25);
+\fill [black] (33.82,-36.25) -- (33.82,-35.31) -- (32.97,-35.83);
+\draw (33.18,-32.91) node [right] {$\epsilon$};
+\draw [black] (51.03,-23.03) -- (52.77,-26.87);
+\fill [black] (52.77,-26.87) -- (52.89,-25.93) -- (51.98,-26.34);
+\draw (52.62,-23.94) node [right] {$\epsilon$};
+\draw [black] (51.05,-36.07) -- (52.75,-32.33);
+\fill [black] (52.75,-32.33) -- (51.97,-32.85) -- (52.88,-33.26);
+\draw (52.62,-35.22) node [right] {$\epsilon$};
+\draw [black] (22.1,-29.6) -- (26.7,-29.6);
+\fill [black] (26.7,-29.6) -- (25.9,-29.1) -- (25.9,-30.1);
+\draw (24.4,-30.1) node [below] {$a$};
+\draw [black] (57,-29.6) -- (64.2,-29.6);
+\fill [black] (64.2,-29.6) -- (63.4,-29.1) -- (63.4,-30.1);
+\draw (60.6,-30.1) node [below] {$\epsilon$};
+\draw [black] (21.7,-28.274) arc (112.73349:67.26651:38.5);
+\fill [black] (21.7,-28.27) -- (22.6,-28.43) -- (22.2,-27.5);
+\draw (35.85,-24.87) node [above] {$\epsilon$};
+%\draw [black] (32.389,-28.274) arc (112.73349:67.26651:24.482);
+%\fill [black] (32.39,-28.27) -- (33.32,-28.43) -- (32.93,-27.5);
+\draw (35.85,-24.87) node [above] {$\epsilon$};
+\draw [black] (9.889,-26.942) arc (149.74552:30.25448:32.369);
+\fill [black] (65.81,-26.94) -- (65.84,-26) -- (64.98,-26.5);
+\draw (37.85,-10.38) node [above] {$\epsilon$};
+\draw [black] (11.5,-29.6) -- (16.1,-29.6);
+\fill [black] (16.1,-29.6) -- (15.3,-29.1) -- (15.3,-30.1);
+\draw (13.8,-30.1) node [below] {$\epsilon$};
+\draw [black] (1,-29.6) -- (5.5,-29.6);
+\fill [black] (5.5,-29.6) -- (4.7,-29.1) -- (4.7,-30.1);
+\end{tikzpicture}
+\end{center}
+
+Наконец, построим автомат $R$ по регулярному выражению $(a(a|b))^*b$. \\ $L(\R) = L(\F) \cdot L(\B)$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (35.4,-19.2) circle (3);
+\draw (35.4,-19.2) node {$q_{0}{\A}$};
+\draw [black] (49.8,-20.3) circle (3);
+\draw (49.8,-20.3) node {$q_{F}{\A}$};
+\draw [black] (35.4,-38.8) circle (3);
+\draw (35.4,-38.8) node {$q_{0}{\B}$};
+\draw [black] (49.8,-38.8) circle (3);
+\draw (49.8,-38.8) node {$q_{F}{\B}$};
+\draw [black] (29.7,-29.6) circle (3);
+\draw (29.7,-29.6) node {$q_{0}^{\C}$};
+\draw [black] (54,-29.6) circle (3);
+\draw (54,-29.6) node {$q_{F}^{\D}$};
+\draw [black] (19.1,-29.6) circle (3);
+\draw (19.1,-29.6) node {$q_{0}^{\D}$};
+\draw [black] (67.2,-29.6) circle (3);
+\draw (67.2,-29.6) node {$q_{F}^{\F}$};
+\draw [black] (8.5,-29.6) circle (3);
+\draw (8.5,-29.6) node {$q_{0}^{\F}$};
+\draw [black] (75.8,-29.6) circle (3);
+\draw (75.8,-29.6) node {$q_{F}^{\R}$};
+\draw [black] (75.8,-29.6) circle (2.4);
+\draw [black] (37.276,-16.882) arc (130.1182:41.14525:7.887);
+\fill [black] (48.3,-17.72) -- (48.15,-16.79) -- (47.39,-17.45);
+\draw (43.07,-14.49) node [above] {$a$};
+\draw [black] (47.727,-40.948) arc (-53.87025:-126.12975:8.695);
+\fill [black] (47.73,-40.95) -- (46.79,-41.02) -- (47.38,-41.82);
+\draw (42.6,-43.12) node [below] {$b$};
+\draw [black] (31.14,-26.97) -- (33.96,-21.83);
+\fill [black] (33.96,-21.83) -- (33.14,-22.29) -- (34.01,-22.77);
+\draw (31.88,-23.21) node [left] {$\epsilon$};
+\draw [black] (31.28,-32.15) -- (33.82,-36.25);
+\fill [black] (33.82,-36.25) -- (33.82,-35.31) -- (32.97,-35.83);
+\draw (33.18,-32.91) node [right] {$\epsilon$};
+\draw [black] (51.03,-23.03) -- (52.77,-26.87);
+\fill [black] (52.77,-26.87) -- (52.89,-25.93) -- (51.98,-26.34);
+\draw (52.62,-23.94) node [right] {$\epsilon$};
+\draw [black] (51.05,-36.07) -- (52.75,-32.33);
+\fill [black] (52.75,-32.33) -- (51.97,-32.85) -- (52.88,-33.26);
+\draw (52.62,-35.22) node [right] {$\epsilon$};
+\draw [black] (22.1,-29.6) -- (26.7,-29.6);
+\fill [black] (26.7,-29.6) -- (25.9,-29.1) -- (25.9,-30.1);
+\draw (24.4,-30.1) node [below] {$a$};
+\draw [black] (57,-29.6) -- (64.2,-29.6);
+\fill [black] (64.2,-29.6) -- (63.4,-29.1) -- (63.4,-30.1);
+\draw (60.6,-30.1) node [below] {$\epsilon$};
+\draw [black] (21.7,-28.274) arc (112.73349:67.26651:38.5);
+\fill [black] (21.7,-28.27) -- (22.6,-28.43) -- (22.2,-27.5);
+\draw (35.85,-24.87) node [above] {$\epsilon$};
+\draw [black] (9.889,-26.942) arc (149.74552:30.25448:32.369);
+\fill [black] (65.81,-26.94) -- (65.84,-26) -- (64.98,-26.5);
+\draw (37.85,-10.38) node [above] {$\epsilon$};
+\draw [black] (11.5,-29.6) -- (16.1,-29.6);
+\fill [black] (16.1,-29.6) -- (15.3,-29.1) -- (15.3,-30.1);
+\draw (13.8,-30.1) node [below] {$\epsilon$};
+\draw [black] (1,-29.6) -- (5.5,-29.6);
+\fill [black] (5.5,-29.6) -- (4.7,-29.1) -- (4.7,-30.1);
+\draw [black] (70.2,-29.6) -- (72.8,-29.6);
+\fill [black] (72.8,-29.6) -- (72,-29.1) -- (72,-30.1);
+\draw (71.5,-30.1) node [below] {$b$};
+\end{tikzpicture}
+\end{center}
+
+%\draw[thin, dashed]  (30.007,-24.648) arc (-18.13684:-161.86316:9.951);
+
+\section*{Задача 3.}
+Построим автомат $\A$ по регулярному выражению $(abba)$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (16.3,-15) circle (3);
+\draw (16.3,-15) node {$q_{0}^{\A}$};
+\draw [black] (29.1,-15) circle (3);
+\draw (29.1,-15) node {$q_{1}^{\A}$};
+\draw [black] (40.8,-15) circle (3);
+\draw (40.8,-15) node {$q_{2}^{\A}$};
+\draw [black] (54.7,-15) circle (3);
+\draw (54.7,-15) node {$q_{3}^{\A}$};
+\draw [black] (66.9,-15) circle (3);
+\draw (66.9,-15) node {$q_{F}^{\A}$};
+\draw [black] (66.9,-15) circle (2.4);
+\draw [black] (8.5,-15) -- (13.3,-15);
+\fill [black] (13.3,-15) -- (12.5,-14.5) -- (12.5,-15.5);
+\draw [black] (19.3,-15) -- (26.1,-15);
+\fill [black] (26.1,-15) -- (25.3,-14.5) -- (25.3,-15.5);
+\draw (22.7,-14.5) node [above] {$a$};
+\draw [black] (32.1,-15) -- (37.8,-15);
+\fill [black] (37.8,-15) -- (37,-14.5) -- (37,-15.5);
+\draw (34.95,-14.5) node [above] {$b$};
+\draw [black] (43.8,-15) -- (51.7,-15);
+\fill [black] (51.7,-15) -- (50.9,-14.5) -- (50.9,-15.5);
+\draw (47.75,-14.5) node [above] {$b$};
+\draw [black] (57.7,-15) -- (63.9,-15);
+\fill [black] (63.9,-15) -- (63.1,-14.5) -- (63.1,-15.5);
+\draw (60.8,-14.5) node [above] {$a$};
+\end{tikzpicture}
+\end{center}
+
+Построим автомат $\B$ по регулярному выражению $(abab)$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (16.3,-15) circle (3);
+\draw (16.3,-15) node {$q_{0}^{\B}$};
+\draw [black] (29.1,-15) circle (3);
+\draw (29.1,-15) node {$q_{1}^{\B}$};
+\draw [black] (40.8,-15) circle (3);
+\draw (40.8,-15) node {$q_{2}^{\B}$};
+\draw [black] (54.7,-15) circle (3);
+\draw (54.7,-15) node {$q_{3}^{\B}$};
+\draw [black] (66.9,-15) circle (3);
+\draw (66.9,-15) node {$q_{F}^{\B}$};
+\draw [black] (66.9,-15) circle (2.4);
+\draw [black] (8.5,-15) -- (13.3,-15);
+\fill [black] (13.3,-15) -- (12.5,-14.5) -- (12.5,-15.5);
+\draw [black] (19.3,-15) -- (26.1,-15);
+\fill [black] (26.1,-15) -- (25.3,-14.5) -- (25.3,-15.5);
+\draw (22.7,-14.5) node [above] {$a$};
+\draw [black] (32.1,-15) -- (37.8,-15);
+\fill [black] (37.8,-15) -- (37,-14.5) -- (37,-15.5);
+\draw (34.95,-14.5) node [above] {$b$};
+\draw [black] (43.8,-15) -- (51.7,-15);
+\fill [black] (51.7,-15) -- (50.9,-14.5) -- (50.9,-15.5);
+\draw (47.75,-14.5) node [above] {$a$};
+\draw [black] (57.7,-15) -- (63.9,-15);
+\fill [black] (63.9,-15) -- (63.1,-14.5) -- (63.1,-15.5);
+\draw (60.8,-14.5) node [above] {$b$};
+\end{tikzpicture}
+\end{center}
+
+Построим автомат $\C$ по регулярному выражению $(abba)|(abab)$ \\ $L(\C) = L(\A) \cup L(\B)$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (9.3,-24.6) circle (3);
+\draw (9.3,-24.6) node {$q_{0}^{\C}$};
+\draw [black] (20.3,-12.5) circle (3);
+\draw (20.3,-12.5) node {$q_{0}^{\A}$};
+\draw [black] (31.1,-12.5) circle (3);
+\draw (31.1,-12.5) node {$q_{1}^{\A}$};
+\draw [black] (40.8,-12.5) circle (3);
+\draw (40.8,-12.5) node {$q_{2}^{\A}$};
+\draw [black] (52.8,-12.5) circle (3);
+\draw (52.8,-12.5) node {$q_{3}^{\A}$};
+\draw [black] (64.3,-12.5) circle (3);
+\draw (64.3,-12.5) node {$q_{F}^{\A}$};
+\draw [black] (74.6,-24.6) circle (3);
+\draw (74.6,-24.6) node {$q_{F}^{\C}$};
+\draw [black] (74.6,-24.6) circle (2.4);
+\draw [black] (20.3,-24.6) circle (3);
+\draw (20.3,-24.6) node {$q_{0}^{\B}$};
+\draw [black] (31.1,-24.6) circle (3);
+\draw (31.1,-24.6) node {$q_{1}^{\B}$};
+\draw [black] (40.8,-24.6) circle (3);
+\draw (40.8,-24.6) node {$q_{2}^{\B}$};
+\draw [black] (52.8,-24.6) circle (3);
+\draw (52.8,-24.6) node {$q_{3}^{\B}$};
+\draw [black] (64.3,-24.6) circle (3);
+\draw (64.3,-24.6) node {$q_{F}^{\B}$};
+\draw [black] (11.32,-22.38) -- (18.28,-14.72);
+\fill [black] (18.28,-14.72) -- (17.37,-14.98) -- (18.11,-15.65);
+\draw (14.26,-17.09) node [left] {$\epsilon$};
+\draw [black] (23.3,-12.5) -- (28.1,-12.5);
+\fill [black] (28.1,-12.5) -- (27.3,-12) -- (27.3,-13);
+\draw (25.7,-12) node [above] {$a$};
+\draw [black] (43.8,-12.5) -- (49.8,-12.5);
+\fill [black] (49.8,-12.5) -- (49,-12) -- (49,-13);
+\draw (46.8,-12) node [above] {$b$};
+\draw [black] (34.1,-12.5) -- (37.8,-12.5);
+\fill [black] (37.8,-12.5) -- (37,-12) -- (37,-13);
+\draw (35.95,-12) node [above] {$b$};
+\draw [black] (55.8,-12.5) -- (61.3,-12.5);
+\fill [black] (61.3,-12.5) -- (60.5,-12) -- (60.5,-13);
+\draw (58.55,-12) node [above] {$a$};
+\draw [black] (66.24,-14.78) -- (72.66,-22.32);
+\fill [black] (72.66,-22.32) -- (72.52,-21.38) -- (71.76,-22.03);
+\draw (70,-17.11) node [right] {$\epsilon$};
+\draw [black] (12.3,-24.6) -- (17.3,-24.6);
+\fill [black] (17.3,-24.6) -- (16.5,-24.1) -- (16.5,-25.1);
+\draw (14.8,-24.1) node [above] {$\epsilon$};
+\draw [black] (23.3,-24.6) -- (28.1,-24.6);
+\fill [black] (28.1,-24.6) -- (27.3,-24.1) -- (27.3,-25.1);
+\draw (25.7,-24.1) node [above] {$a$};
+\draw [black] (34.1,-24.6) -- (37.8,-24.6);
+\fill [black] (37.8,-24.6) -- (37,-24.1) -- (37,-25.1);
+\draw (35.95,-24.1) node [above] {$b$};
+\draw [black] (43.8,-24.6) -- (49.8,-24.6);
+\fill [black] (49.8,-24.6) -- (49,-24.1) -- (49,-25.1);
+\draw (46.8,-24.1) node [above] {$a$};
+\draw [black] (55.8,-24.6) -- (61.3,-24.6);
+\fill [black] (61.3,-24.6) -- (60.5,-24.1) -- (60.5,-25.1);
+\draw (58.55,-24.1) node [above] {$b$};
+\draw [black] (67.3,-24.6) -- (71.6,-24.6);
+\fill [black] (71.6,-24.6) -- (70.8,-24.1) -- (70.8,-25.1);
+\draw (69.45,-24.1) node [above] {$\epsilon$};
+\draw [black] (2.2,-24.6) -- (6.3,-24.6);
+\fill [black] (6.3,-24.6) -- (5.5,-24.1) -- (5.5,-25.1);
+\end{tikzpicture}
+\end{center}
+
+Построим автомат $\D$ по регулярному выражению $(baa)$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (29.1,-15) circle (3);
+\draw (29.1,-15) node {$q_{0}^{\D}$};
+\draw [black] (40.8,-15) circle (3);
+\draw (40.8,-15) node {$q_{1}^{\D}$};
+\draw [black] (54.7,-15) circle (3);
+\draw (54.7,-15) node {$q_{2}^{\D}$};
+\draw [black] (66.9,-15) circle (3);
+\draw (66.9,-15) node {$q_{F}^{\D}$};
+\draw [black] (66.9,-15) circle (2.4);
+\draw [black] (19.3,-15) -- (26.1,-15);
+\fill [black] (26.1,-15) -- (25.3,-14.5) -- (25.3,-15.5);
+\draw [black] (32.1,-15) -- (37.8,-15);
+\fill [black] (37.8,-15) -- (37,-14.5) -- (37,-15.5);
+\draw (34.95,-14.5) node [above] {$b$};
+\draw [black] (43.8,-15) -- (51.7,-15);
+\fill [black] (51.7,-15) -- (50.9,-14.5) -- (50.9,-15.5);
+\draw (47.75,-14.5) node [above] {$a$};
+\draw [black] (57.7,-15) -- (63.9,-15);
+\fill [black] (63.9,-15) -- (63.1,-14.5) -- (63.1,-15.5);
+\draw (60.8,-14.5) node [above] {$a$};
+\end{tikzpicture}
+\end{center}
+
+Построим автомат $\F$ по регулярному выражению $(a|b)^*(abba|abab|baa)(a|b)^*$ \\ $L(\F) = L(\C) \cup L(\D)$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (9.3,-24.6) circle (3);
+\draw (9.3,-24.6) node {$q_{0}^{\F}$};
+\draw [black] (20.3,-12.5) circle (3);
+\draw (20.3,-12.5) node {$q_{0}^{\A}$};
+\draw [black] (31.1,-12.5) circle (3);
+\draw (31.1,-12.5) node {$q_{1}^{\A}$};
+\draw [black] (40.8,-12.5) circle (3);
+\draw (40.8,-12.5) node {$q_{2}^{\A}$};
+\draw [black] (52.8,-12.5) circle (3);
+\draw (52.8,-12.5) node {$q_{3}^{\A}$};
+\draw [black] (64.3,-12.5) circle (3);
+\draw (64.3,-12.5) node {$q_{F}^{\A}$};
+\draw [black] (74.6,-24.6) circle (3);
+\draw (74.6,-24.6) node {$q_{F}^{\F}$};
+\draw [black] (74.6,-24.6) circle (2.4);
+\draw [black] (20.3,-24.6) circle (3);
+\draw (20.3,-24.6) node {$q_{0}^{\B}$};
+\draw [black] (31.1,-24.6) circle (3);
+\draw (31.1,-24.6) node {$q_{1}^{\B}$};
+\draw [black] (40.8,-24.6) circle (3);
+\draw (40.8,-24.6) node {$q_{2}^{\B}$};
+\draw [black] (52.8,-24.6) circle (3);
+\draw (52.8,-24.6) node {$q_{3}^{\B}$};
+\draw [black] (64.3,-24.6) circle (3);
+\draw (64.3,-24.6) node {$q_{F}^{\B}$};
+\draw [black] (20.3,-37.1) circle (3);
+\draw (20.3,-37.1) node {$q_{0}^{\D}$};
+\draw [black] (35.7,-37.1) circle (3);
+\draw (35.7,-37.1) node {$q_{1}^{\D}$};
+\draw [black] (50.3,-37.1) circle (3);
+\draw (50.3,-37.1) node {$q_{2}^{\D}$};
+\draw [black] (64.3,-37.1) circle (3);
+\draw (64.3,-37.1) node {$q_{F}^{\D}$};
+\draw [black] (7.977,-21.92) arc (234:-54:2.25);
+\draw (9.3,-17.35) node [above] {$a,\mbox{ }b$};
+\fill [black] (10.62,-21.92) -- (11.5,-21.57) -- (10.69,-20.98);
+\draw [black] (11.32,-22.38) -- (18.28,-14.72);
+\fill [black] (18.28,-14.72) -- (17.37,-14.98) -- (18.11,-15.65);
+\draw (14.26,-17.09) node [left] {$\epsilon$};
+\draw [black] (23.3,-12.5) -- (28.1,-12.5);
+\fill [black] (28.1,-12.5) -- (27.3,-12) -- (27.3,-13);
+\draw (25.7,-12) node [above] {$a$};
+\draw [black] (43.8,-12.5) -- (49.8,-12.5);
+\fill [black] (49.8,-12.5) -- (49,-12) -- (49,-13);
+\draw (46.8,-12) node [above] {$b$};
+\draw [black] (34.1,-12.5) -- (37.8,-12.5);
+\fill [black] (37.8,-12.5) -- (37,-12) -- (37,-13);
+\draw (35.95,-12) node [above] {$b$};
+\draw [black] (55.8,-12.5) -- (61.3,-12.5);
+\fill [black] (61.3,-12.5) -- (60.5,-12) -- (60.5,-13);
+\draw (58.55,-12) node [above] {$a$};
+\draw [black] (66.24,-14.78) -- (72.66,-22.32);
+\fill [black] (72.66,-22.32) -- (72.52,-21.38) -- (71.76,-22.03);
+\draw (70,-17.11) node [right] {$\epsilon$};
+\draw [black] (76.386,-26.996) arc (64.4302:-223.5698:2.25);
+\draw (76.8,-31.92) node [below] {$a,\mbox{ }b$};
+\fill [black] (73.78,-27.47) -- (72.99,-27.98) -- (73.89,-28.41);
+\draw [black] (12.3,-24.6) -- (17.3,-24.6);
+\fill [black] (17.3,-24.6) -- (16.5,-24.1) -- (16.5,-25.1);
+\draw (14.8,-24.1) node [above] {$\epsilon$};
+\draw [black] (23.3,-24.6) -- (28.1,-24.6);
+\fill [black] (28.1,-24.6) -- (27.3,-24.1) -- (27.3,-25.1);
+\draw (25.7,-24.1) node [above] {$a$};
+\draw [black] (34.1,-24.6) -- (37.8,-24.6);
+\fill [black] (37.8,-24.6) -- (37,-24.1) -- (37,-25.1);
+\draw (35.95,-24.1) node [above] {$b$};
+\draw [black] (43.8,-24.6) -- (49.8,-24.6);
+\fill [black] (49.8,-24.6) -- (49,-24.1) -- (49,-25.1);
+\draw (46.8,-24.1) node [above] {$a$};
+\draw [black] (55.8,-24.6) -- (61.3,-24.6);
+\fill [black] (61.3,-24.6) -- (60.5,-24.1) -- (60.5,-25.1);
+\draw (58.55,-24.1) node [above] {$b$};
+\draw [black] (67.3,-24.6) -- (71.6,-24.6);
+\fill [black] (71.6,-24.6) -- (70.8,-24.1) -- (70.8,-25.1);
+\draw (69.45,-24.1) node [above] {$\epsilon$};
+\draw [black] (11.28,-26.85) -- (18.32,-34.85);
+\fill [black] (18.32,-34.85) -- (18.16,-33.92) -- (17.41,-34.58);
+\draw (14.26,-32.3) node [left] {$\epsilon$};
+\draw [black] (23.3,-37.1) -- (32.7,-37.1);
+\fill [black] (32.7,-37.1) -- (31.9,-36.6) -- (31.9,-37.6);
+\draw (28,-37.6) node [below] {$b$};
+\draw [black] (38.7,-37.1) -- (47.3,-37.1);
+\fill [black] (47.3,-37.1) -- (46.5,-36.6) -- (46.5,-37.6);
+\draw (43,-37.6) node [below] {$a$};
+\draw [black] (53.3,-37.1) -- (61.3,-37.1);
+\fill [black] (61.3,-37.1) -- (60.5,-36.6) -- (60.5,-37.6);
+\draw (57.3,-37.6) node [below] {$a$};
+\draw [black] (66.21,-34.78) -- (72.69,-26.92);
+\fill [black] (72.69,-26.92) -- (71.8,-27.21) -- (72.57,-27.85);
+\draw (70.01,-32.28) node [right] {$\epsilon$};
+\draw [black] (2.2,-24.6) -- (6.3,-24.6);
+\fill [black] (6.3,-24.6) -- (5.5,-24.1) -- (5.5,-25.1);
+\end{tikzpicture}
+\end{center}
+
+
+\section*{Задача 4.}
+$1)$ Автомат $\A$: \\
+$q_0$ -- чётное число нулей. \\
+$q_1$ -- нечётное число нулей.
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (20.7,-19.2) circle (3);
+\draw (20.7,-19.2) node {$q_0$};
+\draw [black] (20.7,-19.2) circle (2.4);
+\draw [black] (38,-19.1) circle (3);
+\draw (38,-19.1) node {$q_1$};
+\draw [black] (19.377,-16.52) arc (234:-54:2.25);
+\draw (20.7,-11.95) node [above] {$1$};
+\fill [black] (22.02,-16.52) -- (22.9,-16.17) -- (22.09,-15.58);
+\draw [black] (36.677,-16.42) arc (234:-54:2.25);
+\draw (38,-11.85) node [above] {$1$};
+\fill [black] (39.32,-16.42) -- (40.2,-16.07) -- (39.39,-15.48);
+\draw [black] (23.401,-17.902) arc (110.64522:70.01715:17.116);
+\fill [black] (35.28,-17.83) -- (34.7,-17.09) -- (34.36,-18.03);
+\draw (29.34,-16.3) node [above] {$0$};
+\draw [black] (35.239,-20.266) arc (-71.6233:-107.71433:18.991);
+\fill [black] (23.47,-20.33) -- (24.08,-21.05) -- (24.39,-20.1);
+\draw (29.36,-21.74) node [below] {$0$};
+\draw [black] (13.9,-19.2) -- (17.7,-19.2);
+\fill [black] (17.7,-19.2) -- (16.9,-18.7) -- (16.9,-19.7);
+\end{tikzpicture}
+\end{center}
+
+Докажем по индукции, что автомат принимает только слова с количеством букв $0$  равным $n$, где $n$ чётно.\\
+a) База: $\eps \in L(\A).$\\
+б) Пусть все слова $\om$ с $n$ буквами $0$ $\in L(A)$. Тогда на слове $\om$ автомат закончил работу в единственном принимающем состоянии $q_0$. Добавим к $\omega$ любое количество букв $1$ потом букву $0$ и любое количество букв $1$. Таким образом мы получим любое слово $\om_1$ в котором $n+1$ буква $a$, автомат на слове $\om_1$ закончит работу в непринимающем состоянии $q_1$.  \\
+Значит слова с нечётным количеством букв $0$ автомат не принимает.\\
+Добавим к $\om_1$ любое количество букв $1$ потом букву $0$ и любое количество букв $1$. Таким образом мы получим любое слово $\om_2$ в котором $n+2$ букв $0$, автомат на слове $\om_2$ закончит работу в принимающем состоянии $q_0$.  \\ 
+Значит слова с чётным количеством букв $0$ автомат принимает.\\
+
+$2)$ Автомат $\B$: \\
+$q_0$ -- чётное число единиц. \\
+$q_1$ -- нечётное число единиц.
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (20.7,-19.2) circle (3);
+\draw (20.7,-19.2) node {$q_0$};
+\draw [black] (38,-19.1) circle (3);
+\draw (38,-19.1) node {$q_1$};
+\draw [black] (38,-19.1) circle (2.4);
+\draw [black] (19.377,-16.52) arc (234:-54:2.25);
+\draw (20.7,-11.95) node [above] {$0$};
+\fill [black] (22.02,-16.52) -- (22.9,-16.17) -- (22.09,-15.58);
+\draw [black] (36.677,-16.42) arc (234:-54:2.25);
+\draw (38,-11.85) node [above] {$0$};
+\fill [black] (39.32,-16.42) -- (40.2,-16.07) -- (39.39,-15.48);
+\draw [black] (23.401,-17.902) arc (110.64522:70.01715:17.116);
+\fill [black] (35.28,-17.83) -- (34.7,-17.09) -- (34.36,-18.03);
+\draw (29.34,-16.3) node [above] {$1$};
+\draw [black] (35.239,-20.266) arc (-71.6233:-107.71433:18.991);
+\fill [black] (23.47,-20.33) -- (24.08,-21.05) -- (24.39,-20.1);
+\draw (29.36,-21.74) node [below] {$1$};
+\draw [black] (13.9,-19.2) -- (17.7,-19.2);
+\fill [black] (17.7,-19.2) -- (16.9,-18.7) -- (16.9,-19.7);
+\end{tikzpicture}
+\end{center}
+Доказывается аналогично случаю 1)
+
+$3)$ Автомат $\C$: \\
+$q_0$ -- чётное число нулей, чётное число единиц. \\
+$q_1$ -- нечётное число нулей, чётное число единиц.\\
+$q_2$ -- нечётное число нулей, нечётное число единиц.\\
+$q_3$ -- чётное число нулей, нечётное число единиц.\\
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (11.7,-19.1) circle (3);
+\draw (11.7,-19.1) node {$q_0$};
+\draw [black] (27.9,-19.1) circle (3);
+\draw (27.9,-19.1) node {$q_1$};
+\draw [black] (42.3,-19.1) circle (3);
+\draw (42.3,-19.1) node {$q_2$};
+\draw [black] (58,-19.1) circle (3);
+\draw (58,-19.1) node {$q_3$};
+\draw [black] (58,-19.1) circle (2.4);
+\draw [black] (14.378,-17.759) arc (110.93443:69.06557:15.175);
+\fill [black] (25.22,-17.76) -- (24.65,-17.01) -- (24.3,-17.94);
+\draw (19.8,-16.26) node [above] {$0$};
+\draw [black] (25.157,-20.306) arc (-71.3829:-108.6171:16.782);
+\fill [black] (14.44,-20.31) -- (15.04,-21.04) -- (15.36,-20.09);
+\draw (19.8,-21.68) node [below] {$0$};
+\draw [black] (4.9,-19.1) -- (8.7,-19.1);
+\fill [black] (8.7,-19.1) -- (7.9,-18.6) -- (7.9,-19.6);
+\draw [black] (30.639,-17.889) arc (107.92209:72.07791:14.497);
+\fill [black] (39.56,-17.89) -- (38.95,-17.17) -- (38.65,-18.12);
+\draw (35.1,-16.69) node [above] {$1$};
+\draw [black] (39.616,-20.426) arc (-70.16514:-109.83486:13.309);
+\fill [black] (30.58,-20.43) -- (31.17,-21.17) -- (31.51,-20.23);
+\draw (35.1,-21.72) node [below] {$1$};
+\draw [black] (45.192,-18.31) arc (101.74752:78.25248:24.351);
+\fill [black] (55.11,-18.31) -- (54.43,-17.66) -- (54.22,-18.64);
+\draw (50.15,-17.3) node [above] {$0$};
+\draw [black] (55.274,-20.342) arc (-70.96652:-109.03348:15.713);
+\fill [black] (45.03,-20.34) -- (45.62,-21.08) -- (45.94,-20.13);
+\draw (50.15,-21.7) node [below] {$0$};
+\draw [black] (14.062,-17.252) arc (125.63011:54.36989:35.684);
+\fill [black] (55.64,-17.25) -- (55.28,-16.38) -- (54.7,-17.19);
+\draw (34.85,-10.07) node [above] {$1$};
+\draw [black] (55.809,-21.148) arc (-49.58128:-130.41872:32.326);
+\fill [black] (13.89,-21.15) -- (14.18,-22.05) -- (14.82,-21.29);
+\draw (34.85,-29.36) node [below] {$1$};
+\end{tikzpicture}
+\end{center}
+\section*{Задача 5.}
+Нет, это не верно. Пусть $L(\B) = \{aa, ab, bbaba\}, L(\A) = \emptyset$, тогда так как фунция перехода $\sg_\A$ не определена ни на одном состоянии, то если определить функцию перехода автомата $\C$ по правилу\\
+$\forall \sigma \in \Sigma : \delta_\C((q_\A,q_\B), \sigma) = (\delta_\A(q_\A, \sigma), \delta_\B(q_\B, \sigma ) )$ то она также не будет нигде определена и автомат $\C$, будет распозновать только пустой язык.
+
+\section*{Задача 6.}
+Множество состояний:
+$\{(q_{0}^{\A},q_{0}^{\B}), (q_{0}^{\A},q_{1}^{\B}), (q_{1}^{\A},q_{0}^{\B}),(q_{1}^{\A},q_{1}^{\B})\}
+$
+
+Функция переходов:\\
+$\sg(q_{0}^{\A},q_{0}^{\B}, 0) = q_{1}^{\A},q_{0}^{\B}$\\
+$\sg(q_{0}^{\A},q_{0}^{\B}, 1) = q_{0}^{\A},q_{1}^{\B}$\\
+$\sg(q_{0}^{\A},q_{1}^{\B}, 0) = q_{1}^{\A},q_{1}^{\B}$\\
+$\sg(q_{0}^{\A},q_{1}^{\B}, 1) = q_{0}^{\A},q_{0}^{\B}$\\
+$\sg(q_{1}^{\A},q_{0}^{\B}, 0) = q_{0}^{\A},q_{0}^{\B}$\\
+$\sg(q_{1}^{\A},q_{0}^{\B}, 1) = q_{1}^{\A},q_{1}^{\B}$\\
+$\sg(q_{1}^{\A},q_{1}^{\B}, 0) = q_{0}^{\A},q_{1}^{\B}$\\
+$\sg(q_{1}^{\A},q_{1}^{\B}, 1) = q_{1}^{\A},q_{0}^{\B}$\\
+Принимающее состояние: 
+$(q_{0}^{\A},q_{1}^{\B})$
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (16,-20.5) circle (3);
+\draw (16,-20.5) node {$q_{0}^{\A},q_{0}^{\B}$};
+\draw [black] (64.4,-20.5) circle (3.1);
+\draw (64.4,-20.5) node {$q_{0}^{\A},q_{1}^{\B}$};
+\draw [black] (64.4,-20.5) circle (2.7);
+\draw [black] (32.1,-20.5) circle (3);
+\draw (32.1,-20.5) node {$q_{1}^{\A},q_{0}^{\B}$};
+\draw [black] (47.5,-20.5) circle (3);
+\draw (47.5,-20.5) node {$q_{1}^{\A},q_{1}^{\B}$};
+\draw [black] (7.5,-20.5) -- (13,-20.5);
+\fill [black] (13,-20.5) -- (12.2,-20) -- (12.2,-21);
+\draw [black] (18.046,-18.307) arc (134.2782:45.7218:31.662);
+\fill [black] (62.25,-18.31) -- (62.03,-17.39) -- (61.33,-18.11);
+\draw (40.15,-8.81) node [above] {$1$};
+\draw [black] (29.484,-21.956) arc (-67.06913:-112.93087:13.946);
+\fill [black] (29.48,-21.96) -- (28.55,-21.81) -- (28.94,-22.73);
+\draw (24.05,-23.56) node [below] {$0$};
+\draw [black] (62.202,-22.643) arc (-47.03784:-132.96216:32.358);
+\fill [black] (18.1,-22.64) -- (18.34,-23.55) -- (19.02,-22.82);
+\draw (40.15,-31.82) node [below] {$1$};
+\draw [black] (49.993,-18.843) arc (116.99691:63.00309:13.012);
+\fill [black] (49.99,-18.84) -- (50.93,-18.93) -- (50.48,-18.03);
+\draw (55.9,-16.93) node [above] {$0$};
+\draw [black] (61.631,-21.859) arc (-68.51317:-111.48683:15.645);
+\fill [black] (61.63,-21.86) -- (60.7,-21.69) -- (61.07,-22.62);
+\draw (55.9,-23.45) node [below] {$0$};
+\draw [black] (34.785,-19.175) arc (110.31991:69.68009:14.441);
+\fill [black] (44.81,-19.17) -- (44.24,-18.43) -- (43.89,-19.37);
+\draw (39.8,-17.78) node [above] {$1$};
+\draw [black] (18.781,-19.385) arc (107.0624:72.9376:17.957);
+\fill [black] (18.78,-19.38) -- (19.69,-19.63) -- (19.4,-18.67);
+\draw (24.05,-18.09) node [above] {$0$};
+\draw [black] (45.16,-22.361) arc (-59.61146:-120.38854:10.596);
+\fill [black] (34.44,-22.36) -- (34.88,-23.2) -- (35.38,-22.33);
+\draw (39.8,-24.32) node [below] {$1$};
+\end{tikzpicture}
+\end{center}
+
+\end{document}

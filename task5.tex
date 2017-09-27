@@ -1,0 +1,455 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%date{05 октября 2016 г.}
+\let\ra\rightarrow
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\o\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Задача  1.}
+
+$S \ra aSa\ |\ aSaa\ |\ aSb\ |\ aSbb\ |\ a\ |\ b$
+
+Будем использовать алгоритм приведённый в книге Серебрякова на 70ой странице.
+Для начала детерминизируем автомат $\A$.
+\begin{center} 
+\begin{tabular}{cccc}
+Макросост. & сост НКА & 0 & 1 \\
+$Q_0$ & $q_0, q_1$ & $Q_1$ & $Q_2$ \\
+$Q_1$ & $q_3, q_2$ & $Q_2$ & $Q_3$ \\
+$Q_2$ & $q_3$ & $Q_4$ & $Q_3$ \\
+$Q_3$ & $q_0, q_1, q_4$ & $Q_4$ & $Q_2$ \\
+$Q_4$ & $q_0, q_1, q_2, q_3$ & $Q_1$ & $Q_5$ \\
+$Q_5$ & $q_0, q_1, q_3, q_4$ & $Q_4$ & $Q_5$ \\
+\end{tabular}
+\end{center} 
+
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (8.9,-28.8) circle (3);
+\draw (8.9,-28.8) node {$Q_0$};
+\draw [black] (21.8,-28.8) circle (3);
+\draw (21.8,-28.8) node {$Q_1$};
+\draw [black] (21.8,-28.8) circle (2.4);
+\draw [black] (21.8,-39.5) circle (3);
+\draw (21.8,-39.5) node {$Q_2$};
+\draw [black] (37.5,-28.8) circle (3);
+\draw (37.5,-28.8) node {$Q_3$};
+\draw [black] (37.5,-28.8) circle (2.4);
+\draw [black] (50.3,-28.8) circle (3);
+\draw (50.3,-28.8) node {$Q_4$};
+\draw [black] (50.3,-28.8) circle (2.4);
+\draw [black] (63.9,-28.8) circle (3);
+\draw (63.9,-28.8) node {$Q_5$};
+\draw [black] (63.9,-28.8) circle (2.4);
+\draw [black] (11.9,-28.8) -- (18.8,-28.8);
+\fill [black] (18.8,-28.8) -- (18,-28.3) -- (18,-29.3);
+\draw (15.35,-29.3) node [below] {$a$};
+\draw [black] (18.923,-38.663) arc (-111.08486:-148.26366:17.665);
+\fill [black] (18.92,-38.66) -- (18.36,-37.91) -- (18,-38.84);
+\draw (12.99,-36.27) node [below] {$b$};
+\draw [black] (21.8,-31.8) -- (21.8,-36.5);
+\fill [black] (21.8,-36.5) -- (22.3,-35.7) -- (21.3,-35.7);
+\draw (21.3,-34.15) node [left] {$a$};
+\draw [black] (24.8,-28.8) -- (34.5,-28.8);
+\fill [black] (34.5,-28.8) -- (33.7,-28.3) -- (33.7,-29.3);
+\draw (29.65,-28.3) node [above] {$b$};
+\draw [black] (40.5,-28.8) -- (47.3,-28.8);
+\fill [black] (47.3,-28.8) -- (46.5,-28.3) -- (46.5,-29.3);
+\draw (43.9,-29.3) node [below] {$a$};
+\draw [black] (53.117,-27.781) arc (104.49592:75.50408:15.913);
+\fill [black] (61.08,-27.78) -- (60.43,-27.1) -- (60.18,-28.06);
+\draw (57.1,-26.77) node [above] {$b$};
+\draw [black] (65.223,-31.48) arc (54:-234:2.25);
+\draw (63.9,-36.05) node [below] {$b$};
+\fill [black] (62.58,-31.48) -- (61.7,-31.83) -- (62.51,-32.42);
+\draw [black] (61.221,-30.134) arc (-70.49628:-109.50372:12.343);
+\fill [black] (52.98,-30.13) -- (53.57,-30.87) -- (53.9,-29.93);
+\draw (57.1,-31.34) node [below] {$a$};
+\draw [black] (1.7,-28.8) -- (5.9,-28.8);
+\fill [black] (5.9,-28.8) -- (5.1,-28.3) -- (5.1,-29.3);
+\draw [black] (35.66,-31.167) arc (-41.12378:-70.32511:26.364);
+\fill [black] (35.66,-31.17) -- (34.76,-31.44) -- (35.51,-32.1);
+\draw (31.65,-36.11) node [below] {$b$};
+\draw [black] (23.304,-36.908) arc (145.33127:103.21983:18.919);
+\fill [black] (23.3,-36.91) -- (24.17,-36.53) -- (23.35,-35.97);
+\draw (27.21,-31.54) node [above] {$b$};
+\draw [black] (23.997,-26.761) arc (128.43392:51.56608:19.39);
+\fill [black] (24,-26.76) -- (24.93,-26.66) -- (24.31,-25.87);
+\draw (36.05,-22.06) node [above] {$a$};
+\end{tikzpicture}
+\end{center}
+
+
+Теперь определи граматику: \\
+1. Нетерминалами граматики будут состояния автомата $N = Q$.\\
+2. В качестве начального символа примем $Q_0.\ S = Q_0.$\\
+ 3.\ $Q_0 \rightarrow aQ_1\ |\ a\ |\ bQ_2$\\
+	\hspace*{0,5cm}$Q_1 \rightarrow aQ_2\ |\ bQ_3\ |\ b$ \\
+	\hspace*{0,5cm}$Q_2 \rightarrow bQ_3\ |\ b$ \\
+\hspace*{0,5cm}$Q_3 \rightarrow aQ_4\ |\ a\ |\ bQ_2$\\
+\hspace*{0,5cm}$Q_4 \rightarrow aQ_1\ |\ a\ |\ bQ_5\ |\ b$\\
+\hspace*{0,5cm}$Q_5 \rightarrow aQ_4\ |\ a\ |\ bQ_5\ |\ b$	\\
+
+
+
+\section*{Задача  2.}
+
+Построим автоматы для правил вывода для каждого нетерминала :
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (9.2,-46.6) circle (3);
+\draw (9.2,-46.6) node {$s_0$};
+\draw [black] (9.2,-46.6) circle (2.4);
+\draw [black] (17.9,-35.4) circle (3);
+\draw (17.9,-35.4) node {$s_1$};
+\draw [black] (30.1,-35.4) circle (3);
+\draw (30.1,-35.4) node {$s_2$};
+\draw [black] (40.7,-35.4) circle (3);
+\draw (40.7,-35.4) node {$s_3$};
+\draw [black] (51.2,-35.4) circle (3);
+\draw (51.2,-35.4) node {$A$};
+\draw [black] (21.5,-46.6) circle (3);
+\draw (21.5,-46.6) node {$s_4$};
+\draw [black] (35.7,-46.6) circle (3);
+\draw (35.7,-46.6) node {$s_5$};
+\draw [black] (48.5,-46.6) circle (3);
+\draw (48.5,-46.6) node {$B$};
+\draw [black] (8.4,-14.8) circle (3);
+\draw (8.4,-14.8) node {$a_0$};
+\draw [black] (17.1,-9.1) circle (3);
+\draw (17.1,-9.1) node {$a_1$};
+\draw [black] (28.7,-9.1) circle (3);
+\draw (28.7,-9.1) node {$B$};
+\draw [black] (16.4,-23.6) circle (3);
+\draw (16.4,-23.6) node {$a_2$};
+\draw [black] (25,-23.6) circle (3);
+\draw (25,-23.6) node {$a_3$};
+\draw [black] (35,-23.6) circle (3);
+\draw (35,-23.6) node {$a_4$};
+\draw [black] (35,-23.6) circle (2.4);
+\draw [black] (54.1,-18.4) circle (3);
+\draw (54.1,-18.4) node {$b_0$};
+\draw [black] (64.5,-13.6) circle (3);
+\draw (64.5,-13.6) node {$b_1$};
+\draw [black] (76.9,-13.6) circle (3);
+\draw (76.9,-13.6) node {$A$};
+\draw [black] (65.5,-21.4) circle (3);
+\draw (65.5,-21.4) node {$b_2$};
+\draw [black] (76.9,-21.4) circle (3);
+\draw (76.9,-21.4) node {$S$};
+\draw [black] (2.7,-46.6) -- (6.2,-46.6);
+\fill [black] (6.2,-46.6) -- (5.4,-46.1) -- (5.4,-47.1);
+\draw [black] (11.04,-44.23) -- (16.06,-37.77);
+\fill [black] (16.06,-37.77) -- (15.17,-38.09) -- (15.96,-38.71);
+\draw (12.98,-39.59) node [left] {$\eps$};
+\draw [black] (20.9,-35.4) -- (27.1,-35.4);
+\fill [black] (27.1,-35.4) -- (26.3,-34.9) -- (26.3,-35.9);
+\draw (24,-34.9) node [above] {$a$};
+\draw [black] (33.1,-35.4) -- (37.7,-35.4);
+\fill [black] (37.7,-35.4) -- (36.9,-34.9) -- (36.9,-35.9);
+\draw (35.4,-34.9) node [above] {$b$};
+\draw [black] (43.7,-35.4) -- (48.2,-35.4);
+\fill [black] (48.2,-35.4) -- (47.4,-34.9) -- (47.4,-35.9);
+\draw (45.95,-34.9) node [above] {$a$};
+\draw [black] (12.2,-46.6) -- (18.5,-46.6);
+\fill [black] (18.5,-46.6) -- (17.7,-46.1) -- (17.7,-47.1);
+\draw (15.35,-47.1) node [below] {$\eps$};
+\draw [black] (24.5,-46.6) -- (32.7,-46.6);
+\fill [black] (32.7,-46.6) -- (31.9,-46.1) -- (31.9,-47.1);
+\draw (28.6,-47.1) node [below] {$a$};
+\draw [black] (38.7,-46.6) -- (45.5,-46.6);
+\fill [black] (45.5,-46.6) -- (44.7,-46.1) -- (44.7,-47.1);
+\draw (42.1,-47.1) node [below] {$b$};
+\draw [black] (10.91,-13.16) -- (14.59,-10.74);
+\fill [black] (14.59,-10.74) -- (13.65,-10.76) -- (14.2,-11.6);
+\draw (16.11,-12.45) node [below] {$\mbox{ }\mbox{ }\mbox{ }\mbox{ }\mbox{ }\eps$};
+\draw [black] (20.1,-9.1) -- (25.7,-9.1);
+\fill [black] (25.7,-9.1) -- (24.9,-8.6) -- (24.9,-9.6);
+\draw (22.9,-8.6) node [above] {$a$};
+\draw [black] (19.4,-23.6) -- (22,-23.6);
+\fill [black] (22,-23.6) -- (21.2,-23.1) -- (21.2,-24.1);
+\draw (20.7,-24.1) node [below] {$a$};
+\draw [black] (28,-23.6) -- (32,-23.6);
+\fill [black] (32,-23.6) -- (31.2,-23.1) -- (31.2,-24.1);
+\draw (30,-24.1) node [below] {$a$};
+\draw [black] (56.82,-17.14) -- (61.78,-14.86);
+\fill [black] (61.78,-14.86) -- (60.84,-14.74) -- (61.26,-15.65);
+\draw (57.23,-15.48) node [above] {$\eps$};
+\draw [black] (57,-19.16) -- (62.6,-20.64);
+\fill [black] (62.6,-20.64) -- (61.95,-19.95) -- (61.7,-20.92);
+\draw (58.21,-20.54) node [below] {$\eps$};
+\draw [black] (67.5,-13.6) -- (73.9,-13.6);
+\fill [black] (73.9,-13.6) -- (73.1,-13.1) -- (73.1,-14.1);
+\draw (70.7,-13.1) node [above] {$b$};
+\draw [black] (68.5,-21.4) -- (73.9,-21.4);
+\fill [black] (73.9,-21.4) -- (73.1,-20.9) -- (73.1,-21.9);
+\draw (71.2,-21.9) node [below] {$a$};
+\draw [black] (10.42,-17.02) -- (14.38,-21.38);
+\fill [black] (14.38,-21.38) -- (14.21,-20.45) -- (13.47,-21.12);
+\draw (11.86,-20.66) node [left] {$\eps$};
+\draw [black] (2.1,-14.8) -- (5.4,-14.8);
+\fill [black] (5.4,-14.8) -- (4.6,-14.3) -- (4.6,-15.3);
+\draw [black] (45.6,-18.4) -- (51.1,-18.4);
+\fill [black] (51.1,-18.4) -- (50.3,-17.9) -- (50.3,-18.9);
+\end{tikzpicture}
+\end{center}
+Для всех нетерминальных символов добавим эпсилон перходы из вершин $A, B$ и $S$ в начальные состояния соответствующих автоматов. Получим автомат распознающий язык $L(G).$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.2]
+\tikzstyle{every node}+=[inner sep=0pt]
+\draw [black] (9.2,-46.6) circle (3);
+\draw (9.2,-46.6) node {$s_0$};
+\draw [black] (9.2,-46.6) circle (2.4);
+\draw [black] (19.9,-37.3) circle (3);
+\draw (19.9,-37.3) node {$s_1$};
+\draw [black] (32,-37.3) circle (3);
+\draw (32,-37.3) node {$s_2$};
+\draw [black] (41.6,-37.3) circle (3);
+\draw (41.6,-37.3) node {$s_3$};
+\draw [black] (51.8,-37.9) circle (3);
+\draw (51.8,-37.9) node {$A$};
+\draw [black] (19.9,-46.6) circle (3);
+\draw (19.9,-46.6) node {$s_4$};
+\draw [black] (32,-46.6) circle (3);
+\draw (32,-46.6) node {$s_5$};
+\draw [black] (45,-46.6) circle (3);
+\draw (45,-46.6) node {$B$};
+\draw [black] (6,-18.9) circle (3);
+\draw (6,-18.9) node {$a_0$};
+\draw [black] (18,-14.8) circle (3);
+\draw (18,-14.8) node {$a_1$};
+\draw [black] (32,-14.8) circle (3);
+\draw (32,-14.8) node {$B$};
+\draw [black] (14.1,-30.2) circle (3);
+\draw (14.1,-30.2) node {$a_2$};
+\draw [black] (23.9,-30.2) circle (3);
+\draw (23.9,-30.2) node {$a_3$};
+\draw [black] (33.1,-30.2) circle (3);
+\draw (33.1,-30.2) node {$a_4$};
+\draw [black] (33.1,-30.2) circle (2.4);
+\draw [black] (53.4,-21.4) circle (3);
+\draw (53.4,-21.4) node {$b_0$};
+\draw [black] (64.5,-13.6) circle (3);
+\draw (64.5,-13.6) node {$b_1$};
+\draw [black] (76.9,-13.6) circle (3);
+\draw (76.9,-13.6) node {$A$};
+\draw [black] (65.5,-21.4) circle (3);
+\draw (65.5,-21.4) node {$b_2$};
+\draw [black] (76.9,-21.4) circle (3);
+\draw (76.9,-21.4) node {$S$};
+\draw [black] (2.7,-46.6) -- (6.2,-46.6);
+\fill [black] (6.2,-46.6) -- (5.4,-46.1) -- (5.4,-47.1);
+\draw [black] (11.46,-44.63) -- (17.64,-39.27);
+\fill [black] (17.64,-39.27) -- (16.7,-39.42) -- (17.36,-40.17);
+\draw (12.43,-41.46) node [above] {$\eps$};
+\draw [black] (22.9,-37.3) -- (29,-37.3);
+\fill [black] (29,-37.3) -- (28.2,-36.8) -- (28.2,-37.8);
+\draw (25.95,-36.8) node [above] {$a$};
+\draw [black] (35,-37.3) -- (38.6,-37.3);
+\fill [black] (38.6,-37.3) -- (37.8,-36.8) -- (37.8,-37.8);
+\draw (36.8,-36.8) node [above] {$b$};
+\draw [black] (44.59,-37.48) -- (48.81,-37.72);
+\fill [black] (48.81,-37.72) -- (48.04,-37.18) -- (47.98,-38.18);
+\draw (46.77,-37.05) node [above] {$a$};
+\draw [black] (12.2,-46.6) -- (16.9,-46.6);
+\fill [black] (16.9,-46.6) -- (16.1,-46.1) -- (16.1,-47.1);
+\draw (14.55,-47.1) node [below] {$\eps$};
+\draw [black] (22.9,-46.6) -- (29,-46.6);
+\fill [black] (29,-46.6) -- (28.2,-46.1) -- (28.2,-47.1);
+\draw (25.95,-47.1) node [below] {$a$};
+\draw [black] (35,-46.6) -- (42,-46.6);
+\fill [black] (42,-46.6) -- (41.2,-46.1) -- (41.2,-47.1);
+\draw (38.5,-47.1) node [below] {$b$};
+\draw [black] (8.84,-17.93) -- (15.16,-15.77);
+\fill [black] (15.16,-15.77) -- (14.24,-15.56) -- (14.57,-16.5);
+\draw (15.03,-17.46) node [below] {$\mbox{ }\mbox{ }\mbox{ }\mbox{ }\mbox{ }\eps$};
+\draw [black] (21,-14.8) -- (29,-14.8);
+\fill [black] (29,-14.8) -- (28.2,-14.3) -- (28.2,-15.3);
+\draw (25,-14.3) node [above] {$a$};
+\draw [black] (7.75,-21.34) -- (12.35,-27.76);
+\fill [black] (12.35,-27.76) -- (12.29,-26.82) -- (11.48,-27.4);
+\draw (9.46,-25.93) node [left] {$\eps$};
+\draw [black] (17.1,-30.2) -- (20.9,-30.2);
+\fill [black] (20.9,-30.2) -- (20.1,-29.7) -- (20.1,-30.7);
+\draw (19,-30.7) node [below] {$a$};
+\draw [black] (26.9,-30.2) -- (30.1,-30.2);
+\fill [black] (30.1,-30.2) -- (29.3,-29.7) -- (29.3,-30.7);
+\draw (28.5,-30.7) node [below] {$a$};
+\draw [black] (55.85,-19.68) -- (62.05,-15.32);
+\fill [black] (62.05,-15.32) -- (61.1,-15.38) -- (61.68,-16.19);
+\draw (56.84,-17) node [above] {$\eps$};
+\draw [black] (56.4,-21.4) -- (62.5,-21.4);
+\fill [black] (62.5,-21.4) -- (61.7,-20.9) -- (61.7,-21.9);
+\draw (59.45,-21.9) node [below] {$\eps$};
+\draw [black] (67.5,-13.6) -- (73.9,-13.6);
+\fill [black] (73.9,-13.6) -- (73.1,-13.1) -- (73.1,-14.1);
+\draw (70.7,-13.1) node [above] {$b$};
+\draw [black] (68.5,-21.4) -- (73.9,-21.4);
+\fill [black] (73.9,-21.4) -- (73.1,-20.9) -- (73.1,-21.9);
+\draw (71.2,-21.9) node [below] {$a$};
+\draw [black] (55.697,-23.321) arc (43.84349:-80.71339:13.765);
+\fill [black] (55.7,-23.32) -- (55.89,-24.24) -- (56.61,-23.55);
+\draw (59.59,-37.91) node [right] {$\eps$};
+\draw [black] (8.98,-19.244) arc (82.41085:52.52719:84.968);
+\fill [black] (8.98,-19.24) -- (9.71,-19.84) -- (9.84,-18.85);
+\draw (32.35,-24.45) node [above] {$\eps$};
+\draw [black] (8.239,-16.903) arc (130.2076:58.34258:56.52);
+\fill [black] (8.24,-16.9) -- (9.17,-16.77) -- (8.53,-16.01);
+\draw (40.28,-3.07) node [above] {$\eps$};
+\draw [black] (34.87,-15.68) -- (50.53,-20.52);
+\fill [black] (50.53,-20.52) -- (49.92,-19.8) -- (49.62,-20.76);
+\draw (40.9,-18.7) node [below] {$\eps$};
+\draw [black] (76.088,-24.287) arc (-17.6795:-121.4869:43.649);
+\fill [black] (11.7,-48.25) -- (12.12,-49.1) -- (12.65,-48.25);
+\draw (51.7,-52.49) node [below] {$\eps$};
+\end{tikzpicture}
+\end{center}
+
+\section*{Задача  3.}
+Нет, грамматика $G$ не явяется однозначной, так как слово $abaaa$ можно вывести разными способами. Например: $S \ra abaA \ra abaaa$ и\\ $S \ra abaA \ra abaaB \ra abaaaS \ra abaaa$.
+
+\section*{Задача  4.}
+1. $\forall i \neq j : a^i, a^j \in \{a^n\}$ выберем подслово $z = ab^i$. Получим, что $a^i\cdot z=a^iab^i \in L$, а $a^j\cdot z=a^jab^i \notin L$. Таким образом любые два элемента последовательности $\{a^n\}$ лежат в разных классах эквивалетности. И по теореме Майхилла — Нероуда язык не регулярный.
+2. Допустим, что дополнение регулярный язык, тогда существует ДКА распознающий этот язык. Доопределим всюду этот ДКА добавляя ещё одно непринимающее состояние и добавляя отсутствующее переходы. Теперь сделаем принимающие состояния непринимающиими, а непринимающие принимающими. Таки образом мы построили автомат к дополнению дополнения, то есть к самому языку, а, по ранее доказаному этого автомата не существует. 
+
+\section*{Задача  5.}
+$G: S \ra aSbb\ |\ aSb\ |\ \eps$.
+
+
+Докажем, что $L\subset L(G)$. $\forall \o in L, |\o| = n \hookrightarrow \o in L(G)$. \\
+$n = 0, \eps \in L(G)$\\
+Допустим выполнено для всех слов длины $n-1$, слово длины $n, \o \in L$ можно представить в виде $a\o_1b$. По предположению индукции $\o_1$ выводится по правилам грамматики и, так как в грамматике есть правило $S \ra aSb$, то $\o$ тоже выводится.\\
+Включение в обратную сторону очевидно.
+
+	\prp Верно ли, что праволинейная грамматика $G$ однозначна тогда и только тогда, когда построенный по ней автомат является детерминированным?
+
+	\prp Назовём грамматику линейной, если в правой части её правил может быть не более одного нетерминала. Верно ли, что для любой линейной грамматики $G$, $L(G) \in \REG$?
+
+	\bigskip
+
+	Ещё раз напоминаю, что задачи, помеченные $\dagger$ являются дополнительными, поэтому списывать их из книжек -- бессмысленное увеличение энтропии.
+
+	\begin{Def}
+		Для языка $L \subseteq \{\sigma_1,\sigma_2,\ldots,\sigma_n\}^* = \Sigma_n^*$ и языков $L_{\sigma_1}, L_{\sigma_2}, \ldots, L_{\sigma_n} \subseteq \Sigma_n^* $, подстановкой  в $L$ языков $L_{\sigma_1},\ldots, L_{\sigma_n}$ назовём язык $L^{\prime} $, такой что для всех слов $w = w[1]\ldots w[n]$ из языка $L$ справедливо $ L_{w[1]}L_{w[2]}\ldots L_{w[n]} \subseteq L^{\prime}$
+	\end{Def}
+
+	\prdag Доказать, что регулярные языки замкнуты относительно операции подстановки.
+
+	\begin{Def}
+		Даны алфавиты $\Sigma$ и $\Delta$. Для языка $L \subseteq \Sigma\times \Delta$ определены операции проекции на $\Sigma^*$ и $\Delta^*$. Проекцией $L$ на $\Sigma^*$ называется язык $L_\Sigma = \{ w \in \Sigma^*\, |\, \exists v \in \Delta^* : (w,v) \in L \}$. Проекция $L$ на $\Delta^*$ определяется аналогичным образом.
+	\end{Def}
+
+	\prdag Доказать, что регулярные языки замкнуты относительно операции проекции.
+
+	\begin{Def}
+		Для языка $L_\Sigma \subseteq \Sigma^*$, $\Delta$-целиндром называется язык $L$, такой что $L = \{w\, |\, w = (u, v), u \in L_\Sigma, v \in \Delta^* \}$
+	\end{Def}
+
+	\prdag Показать, что $\Sigma$-проекция $\Delta$-цилиндра $L$ есть $L$. Доказать, что регулярные языки замкнуты относительно операции цилиндра.
+
+	\prp На семинаре я «доказал», что грамматика $G: S \to aSb\,|\, SS \,|\, \eps $ порождает язык правильных скобочных выражений с одним типом скобок -- язык Дика $D_1$. На самом деле, я дал доказательство только в одну сторону: что любое слово, выведенное из этой грамматики будет правильным скобочным выражением. После чего порадовавшись, что меня никто за руку не поймал, в назидание оставляю доказательство в другую сторону в качестве домашней задачи. Напомню, что мы договорились считать, что слово $w$ является правильным скобочным выражением, если его скобочный итог $d(w)$ равен нулю, и при этом скобочный итог любого префикса $w$ неотрицательный. Скобочным итогом называется разница между числом открывающих и закрывающих скобок: $d(u) = |u|_a - |u|_b$.
+
+	\prp Является ли грамматика $G$ для языка $D_1$ из предыдущей задачи однозначной?
+	
+
+
+\end{document}

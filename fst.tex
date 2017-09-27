@@ -1,0 +1,232 @@
+ \documentclass[12pt]{article}
+ \usepackage[T2A]{fontenc}
+ \usepackage[utf8]{inputenc}        % Кодировка входного документа;
+ % при необходимости, вместо cp1251
+ % можно указать cp866 (Alt-кодировка
+ % DOS) или koi8-r.
+ 
+ \usepackage[english,russian]{babel} % Включение русификации, русских и
+ % английских стилей и переносов
+ %%\usepackage{a4}
+ %%\usepackage{moreverb}
+ \usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+ \usepackage{indentfirst}
+ \usepackage{verbatim}
+ \usepackage{tikz} %Рисование автоматов
+ \usetikzlibrary{automata,positioning}
+ \usepackage{multicol} %Несколько колонок
+ \usepackage{graphicx}
+ \usepackage[colorlinks,urlcolor=blue]{hyperref}
+ 
+ %% \voffset-5mm
+ %% \def\baselinestretch{1.44}
+ \renewcommand{\theequation}{\arabic{equation}}
+ \def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+ \newtheorem{Lemma}{Лемма}
+ \theoremstyle{definiton}
+ \newtheorem{Remark}{Замечание}
+ %%\newtheorem{Def}{Определение}
+ \newtheorem{Claim}{Утверждение}
+ \newtheorem{Cor}{Следствие}
+ \newtheorem{Theorem}{Теорема}
+ \theoremstyle{definition}
+ \newtheorem{Example}{Пример}
+ \newtheorem*{known}{Теорема}
+ \def\proofname{Доказательство}
+ \theoremstyle{definition}
+ \newtheorem{Def}{Определение}
+ 
+ %% \newenvironment{Example} % имя окружения
+ %% {\par\noindent{\bf Пример.}} % команды для \begin
+ %% {\hfill$\scriptstyle\qed$} % команды для \end
+ 
+ 
+ 
+ 
+ 
+ 
+ %\date{22 июня 2011 г.}
+ \let\leq\leqslant
+ \let\geq\geqslant
+ \def\MT{\mathrm{MT}}
+ %Обозначения ``ажуром''
+ \def\BB{\mathbb B}
+ \def\CC{\mathbb C}
+ \def\RR{\mathbb R}
+ \def\SS{\mathbb S}
+ \def\ZZ{\mathbb Z}
+ \def\NN{\mathbb N}
+ \def\FF{\mathbb F}
+ %греческие буквы
+ \let\epsilon\varepsilon
+ \let\es\emptyset
+ \let\eps\varepsilon
+ \let\al\alpha
+ \let\sg\sigma
+ \let\ga\gamma
+ \let\ph\varphi
+ \let\om\omega
+ \let\ld\lambda
+ \let\Ld\Lambda
+ \let\vk\varkappa
+ \let\Om\Omega
+ \def\abstractname{}
+ 
+ \def\R{{\cal R}}
+ \def\A{{\cal A}}
+ \def\B{{\cal B}}
+ \def\C{{\cal C}}
+ \def\D{{\cal D}}
+ \let\w\omega
+ 
+ %классы сложности
+ \def\REG{{\mathsf{REG}}}
+ \def\CFL{{\mathsf{CFL}}}
+ \newcounter{problem}
+ \newcounter{uproblem}
+ \newcounter{subproblem}
+ \def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+ \def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+ \def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+ \def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+ \def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+ %\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+ %\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+ \def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+ %прочее
+ \def\quotient{\backslash\negthickspace\sim}
+ 
+ \begin{document}
+ 
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+ 
+ 	\prp \\
+		\prsub $ \{a,\ aa\} \cdot \{b,\ bb\} = \{ab,\ abb,\ aab,\ aabb\}$\\ 
+		\hspace*{0.5cm} так как $ X \cdot Y = \{x \cdot y, x \in X, y \in Y\}$\\
+		
+		\prsub $ \{a,\ aa\} + \{b,\ bb\} = \{a,\ aa,\ b,\ bb\} $\\
+		\hspace*{0.5cm} так как $ X + Y = \{x, x \in X | x \in Y\}$\\
+		
+		\prsub $ \{a,\ aa\} \times \{b,\ bb\} = \{(a, b),\ (a, bb),\ (aa, b),\ (aa, bb)\}$\\
+		\hspace*{0.5cm} так как $X \times Y = \{ (x,y)\ |\ x \in X,\ y \in Y \}$\\
+		
+		\prsub $ ((aa|b)^*(a|bb)^*)^* = (b^*a^*)^* = (a|b)^*$\\
+		
+		\prsub $ \{a^{3n}|n>0\} \cap \{a^{5n+1}|n \geq 0\}^* = \{a^{3n}|n>0\}$\\
+		\hspace*{0.5cm} так как $a^1 \in \{a^{5n+1}|n \geq 0\}$, a значит $ \{a^{5n+1}|n \geq 0\}^* = \{a|b\}^* $ 
+		
+		\prsub $ \emptyset \cap \{\eps \} = \emptyset$\\
+		\hspace*{0.5cm} так как в пустом множестве нет элементов
+		
+		
+		
+	\prp \\
+	Пусть А интересующий нас язык. Пусть $ \om \in A$. Представим $ \om $ в виде $ \om_1ab\om_2 $, где $\om_1$ и $\om_2  $ не содержат $ ab $. Тогда $\om_1$ представляется в виде $b\dots b a\dots a$, a $ \om_2 $ в виде $ a\dots a b \dots b $. \\
+ 	Ответ: $ b^*a^*(ab)b^*a^* $
+ 	
+ 	
+ 	\prp \\
+ 	$L =\Sigma^*\setminus{\{ (a|b)^*bb(a|b)^* \}}$ \\
+ 	$T = \{(a|(ba))^*(b|\eps)\} $\\
+ 	\hspace*{0.5cm}1) Докажем, что $T \subseteq L$:\\
+	    Язык $L$ включает все слова без $bb$. Представим слово языка $T$ в виде $\om_1 \cdot \om_2$, где $\om_1 = (a|(ba))^*$, а $\om_2 = (b|\eps)$. Если $b$ встретится в $\om_1$, то после обязательно следует $a$. Так же $\om_1$ либо пустое либо заканчивается на $a$. $\om_2$ либо пустое либо $b$. Это значит, что словах языка $Т$ нету $bb$. $\Rightarrow T \subseteq L$. 
+	 %\hspace*{0.5cm}1) Докажем, что $L \subseteq T$:\\
+	 %В словах языка $L$ после $b$ обязательно должно идти $a$ или же $b$ должно являться концом слова.
+	 	
+ 	
+ 	\prp
+	 	\begin{tabbing}
+	 	\prsub \=Автомат $ \A:(Q, \Sigma, \delta, q_0, F)$, где \\
+		\>$ Q = \{q_0, q_1, q_2\}; $ \\
+		\> $ \Sigma = \{a, b\};$ \\
+		\> $ \delta:$\= \\
+				\>\>$\delta(q_0, b)=\{q_0\},$\\
+				\>\>$\delta(q_0, a)=\{q_1\},$\\
+				\>\>$\delta(q_1, a)=\{q_0\},$\\
+				\>\>$\delta(q_1, b)=\{q_2\},$\\
+				\>\>$\delta(q_2, a)=\{q_2\},$\\
+				\>\>$\delta(q_2, b)=\{q_1\},$\\
+		\>$ F = \{q_1\}; $\\\\
+		Автомат $ \B:(Q, \Sigma, \delta, q_0, F)$, где \\
+		\ \ \ \ \ \= \kill
+		\>$ Q = \{q_0, q_1, q_2\}; $ \\
+		\> $ \Sigma = \{a, b\};$ \\
+		\> $ \delta:$\= \\
+				\>\>$\delta(q_0, b)=\{q_0\},$\\
+				\>\>$\delta(q_0, a)=\{q_1\},$\\
+				\>\>$\delta(q_1, b)=\{q_0, q_2\},$\\
+				\>\>$\delta(q_2, a)=\{q_2\},$\\
+				\>\>$\delta(q_2, b)=\{q_1\}, $\\
+		\>$ F = \{q_1\}; $
+	\end{tabbing}	
+	
+		\prsub \ \ Автомат $ \A $ детерминированный, так как функция перехода из каждой вершины определена однозначно.\par
+		Автомат $ \B $ недетерминированный, так как функция перехода от $(q_1, b)$ определена неоднозначно.
+		
+		\prsub $(q_0, aababab)\vdash(q_1, ababab)\vdash(q_0, babab)\vdash(q_0, abab)\vdash(q_1, bab)\vdash(q_2, ab)\vdash(q_2, b)\vdash(q_1, \eps)$\\
+		$aababab \in L(\A)$ так как автомат $ \A $ на входе $aababab$ закончил работу в принимающем состоянии. $(q_1 \in F)$
+		
+		\prsub Автомат $\B$ принимает слово $ abbba $, так как\\
+		$ (q_0, abbba)\vdash(q_1, bbba)\vdash(q_0, bba)\vdash(q_0, ba)\vdash(q_0, a)\vdash(q_1, \eps)$ и $(q_1 \in F)$
+			
+		\prsub $a \in L(\A);\ abb \in L(\B);\ b\notin L(\A);\ bb\notin L(\B)$
+	
+	\prp\\
+	\prsub 1) Докажем по индукции, что  $\forall \om \in L:|\om|=n \hookrightarrow \om \in T$.\\
+	База индукции: для слов длины меньшей трёх из $L$ выполнено.\\
+	Шаг индукции: Пусть утверждение доказано для слов длины $n-1$, $n-2$ и $n-3$. Тогда дописывая к ним $a, ba, bba$ мы получим слова в которых так же нет трёх букв $b$ подряд.\\ Значит $w \in T$, где $|w| = n $.\\ 
+	
+	
+	\hspace*{0,5cm}2) Докажем по индукции, что $\forall \om \in T: |\om|=n \hookrightarrow \om \in L$\\
+	База индукции: $\{\eps, a, b, ab, aa, bb\} \subset L$.\\
+	Шаг индукции: Пусть утверждение доказано для слов длины $n-1$. Тогда если $\om = a\om_1$, где $|\om_1| = n-1$, то так как $\om_1 \in L \Rightarrow a\cdot \om_1 \in L \Rightarrow \om \in L$.
+	Если же $\om = b\om_1$, то: \\
+	\hspace*{0,5cm}если $\om_1$ начинается с $a$, то $\om = ba\om_2$, $\om_2 \in L \Rightarrow ba\cdot \om_2 \in L \Rightarrow \om \in L$.\\
+	\hspace*{0,5cm}если $\om_1$ начинается с $b$, то $\om = bba\om_2$, так как $\om \in T$. $\om_2 \in L \Rightarrow bba\cdot \om_2 \in L \Rightarrow \om \in L$.\\ 
+	
+	\prsub 
+	\begin{center}
+		\begin{tikzpicture}[scale=0.2]
+		\tikzstyle{every node}+=[inner sep=0pt]
+		\draw [black] (19.1,-19.5) circle (3);
+		\draw (19.1,-19.5) node {$q_0$};
+		\draw [black] (19.1,-19.5) circle (2.4);
+		\draw [black] (35.4,-19.5) circle (3);
+		\draw (35.4,-19.5) node {$q_1$};
+		\draw [black] (35.4,-19.5) circle (2.4);
+		\draw [black] (51.5,-19.5) circle (3);
+		\draw (51.5,-19.5) node {$q_2$};
+		\draw [black] (51.5,-19.5) circle (2.4);
+		\draw [black] (22.1,-19.5) -- (32.4,-19.5);
+		\fill [black] (32.4,-19.5) -- (31.6,-19) -- (31.6,-20);
+		\draw (27.25,-20) node [below] {$b$};
+		\draw [black] (38.4,-19.5) -- (48.5,-19.5);
+		\fill [black] (48.5,-19.5) -- (47.7,-19) -- (47.7,-20);
+		\draw (43.45,-20) node [below] {$b$};
+		\draw [black] (10.7,-19.5) -- (16.1,-19.5);
+		\fill [black] (16.1,-19.5) -- (15.3,-19) -- (15.3,-20);
+		\draw [black] (17.777,-16.82) arc (234:-54:2.25);
+		\draw (19.1,-12.25) node [above] {$a$};
+		\fill [black] (20.42,-16.82) -- (21.3,-16.47) -- (20.49,-15.88);
+		\draw [black] (21.191,-17.364) arc (127.05418:52.94582:10.055);
+		\fill [black] (21.19,-17.36) -- (22.13,-17.28) -- (21.53,-16.48);
+		\draw (27.25,-14.83) node [above] {$a$};
+		\draw [black] (49.611,-21.827) arc (-43.4335:-136.5665:19.707);
+		\fill [black] (20.99,-21.83) -- (21.18,-22.75) -- (21.9,-22.06);
+		\draw (35.3,-28.49) node [below] {$a$};
+		\end{tikzpicture}
+	\end{center}
+	\hspace*{0.5cm} Докажем по индукции, что этот автомат распознаёт слово длины $ n $ языка $ T $. \\
+	1) База индукции:
+	$ n = 0 $, если на вход автомату дать $ \eps $, то он остановится в принимающем состоянии $ q_0 $.\\
+	2) Пусть Автомат принял слово $ \om_1 $ длины $ n-1 $ из языка $ T $, докажем, что он примет слово $ \om $ длины $ n $ из языка $ T $.\\
+	\hspace*{0.5cm}Если $ \om $ получилось дописыванием буквы $ a $ к $ \om_1 $, то автомат закончит в принимающем состоянии $ q_0 $. Так как из любого состояния определен переход по $ a $ в состояние $ q_0 $. \\
+	\hspace*{0.5cm}Если же это слово получилось дописыванием буквы $ b $ к слову длины $ n-1 $, то возможны следующие случаи:\\
+	\hspace*{0.5cm} а)$ \om_1 $ заканчивается на $ a $\\
+	\hspace*{1cm} Тогда автомат закончит работу в принимающем состоянии $ q_1 $. Так как на $ \om_1 $ автомат закончил в состоянии $ q_0 $.\\
+	\hspace*{0.5cm} б)$ \om_1 $ заканчивается на одну букву $ b $\\
+	\hspace*{1cm} Тогда автомат закончит работу в принимающем состоянии $ q_2 $. Так как на $ \om_1 $ автомат закончил в состоянии $ q_1 $.\\
+	\hspace*{0.5cm} в)$ \om_1 $ заканчивается на $ bb $\\
+		Тогда автомат на $ \om_1 $ закончил в состоянии $ q_2 $, а по букве $ b $ из $ q_2 $ переход не определен. Значит слово, в котором 3 буквы $ b $ подряд не распознается автоматом. 
+ \end{document}
+ 

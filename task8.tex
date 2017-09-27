@@ -1,0 +1,150 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%date{05 октября 2016 г.}
+\let\ra\rightarrow
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\o\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Упражнение  1.}
+Пусть у нас есть два КС языка $L_1$ и $L_2$. Без ограничения общности положим, что множества нетерминальных символов у них не пересекаются. Пусть стартовый символы $S1$ и $S2$. Тогда построим Грамматику для языка $L = L_1 \cup L_2$ добавил к правилам для $L_1$ и $L_2$ ещё два: $S \ra S_1\ |\ S_2$, где $S$ стартовый символ для языка $L$. Из нетерминала $S_1$ выводимы все слова языка $L_1$ и только они. То же справедливо для языка $L_2$ и нетерминала $S_2$. Получаем что из $S$ выводимы слова языка $L_1 \cup L_2$ и только они.
+
+\section*{Задача 1.}
+Пусть язык $L$ задан МП-автоматом принимающим по допускающему состоянию.\\
+$\A = (Q_L, \Sigma, \Gamma, \sigma_L, q_{0L}, Z_0, F_L)$\\
+Пусть язык $R$ задан детерминированным конечным автоматом\\ $\B = (Q_R, \Sigma, \sigma_R, q_{0R}, F_R)$.\\
+%Построим МП автомат распознающий язык $R$. $\C = (Q_R, \Sigma, \Gamma, \sigma^{'}_R, q_{0R}, Z_0, F_R)$, определим функцию переходов так: \\$\forall \o \in \Sigma, \ \forall q \in Q_R, \ \forall \alpha \in \Gamma \ (\sigma_R(q, \o) = q_n \ra \sigma^{'}_R(q, \o, \alpha) = q_n)$ .\\
+Построим пересечение этих автоматов:\\
+$ \C = (Q_L \times Q_R, \Sigma, \Gamma, \sigma_\cap, (q_{0L}, q_{0R}), Z_0, F_L \times F_R)$\\
+Функцию переходов определим так: \\
+$\sigma_\cap((q_1, q_2), \o, \alpha) = (\sigma_L(q_1, \o, \alpha), \sigma_R(q_2, \o)) $
+Мы построили МП автомат для языка пересечения, значит язык пересечения КС язык.
+
+\section*{Задача 3.}
+Предположим, что $L\in \CFL$, тогда для некоторого числа $p$ выполнена лемма о накачке. Рассмотрим слово $w = a^pb^pc^p$. Тогда подслово $uyv$ из разбиения слова $w$, существующего по лемме о накачке, либо состоит из одинаковых букв ($a^l$ или $b^l$ или $c^l$) или имеет вид $a^lb^r$ или $b^lc^r$. Три различные буквы подслово $uyv$ содержать не может, поскольку его длина ограниченна числом $p$. Но тогда $uv$ -- слово, в котором нет одной из трёх букв. Пусть это будет буква $c$ для определённости. Взяв $i = 0$, получаем, что по лемме о накачке $w_0 = a^{p-k}b^{p-m}c^p \in L $, при этом $k+m \geq 1$, откуда следует, что слово $w_0$ не принадлежит языку $L$. 
+
+\section*{Задача 4.}
+Нет, это не верно, так как $abc \notin \Sigma^*\setminus \{ a^nb^nc^n \mid n\geq 0  \}$.\\
+$a \in \{a^ib^jc^k \mid i\neq j \lor i \neq k \}$, при $i = 1, j = k = 0$.\\
+$b \in \{a^ib^jc^k \mid i\neq j \lor i \neq k \}$, при $i = 0, j = 1, k = 0$.\\
+$c \in \{a^ib^jc^k \mid i\neq j \lor i \neq k \}$, при $i = 0, j = 0, k = 1$.\\
+Значит $abc \in \{a^ib^jc^k \mid i\neq j \lor i \neq k \}^3 \subset \{a^ib^jc^k \mid i\neq j \lor i \neq k \}^*$.
+\section*{Задача 5.}
+Да, это верно. Построим грамматику для $L = \{a^mb^mb^nc^n\ |\ n, m \geq 0 \}$:
+
+$S\ra AB$
+
+$A\ra aAb\ |\ \epsilon$
+
+$B\ra bBc\ |\ \epsilon$.
+
+Если слово было выведено из грамматики, то сначала было применено правило $S\ra AB$. Затем $n$ раз правило $A\ra aAb$ и правило $A\ra \epsilon$.Затем $k$ раз правило $B\ra bBc$ и правило $B\ra \epsilon$. Получившиееся слово имеет вид $a^nb^nb^kc^k$ и лежит в языке.
+ 
+Любое слово из языка можно вывести из грамматики сначала надо применить правило $S\ra AB$. Затем $m$ раз правило $A\ra aAb$ и правило $A\ra \epsilon$.Затем $n$ раз правило $B\ra bBc$ и правило $B\ra \epsilon$.
+
+Заметим, что язык $L$ совдадает с языком из условия задачи, так как $b^nb^m=b^{n+m} = b^{m+n} = b^mb^n$.
+
+\section*{Задача 6.}
+Предположим, что $L\in \CFL$, тогда для некоторого числа $p$ выполнена лемма о накачке. Рассмотрим слово $w = a^pb^pa^pb^p$. Тогда подслово $uyv$ из разбиения слова $w$, существующего по лемме о накачкe имеет вид:\\
+1) $a^l$, взяв $i = 2$ по лемме о накачке получаем, что $a^{p+k}b^pa^pb^p \in L$, если подслово $uyv$ лежит в первой части слова, и $a^{p}b^pa^{p+k}b^p \in L$, если подслово $uyv$ лежит в первой части слова. Получаем противоречие так как $k \geq 1$\\
+2) $b^l$, аналогично пункту 1) получаем противоречие.\\
+3)$a^lb^m$,  взяв $i = 2$ по лемме о накачке получаем, что $a^{p+k}b^{p+n}a^pb^p \in L$, если подслово $uyv$ лежит в первой части слова, и $a^{p}b^pa^{p+k}b^{p+n} \in L$, если подслово $uyv$ лежит в первой части слова. Получаем противоречие так как $k+n \geq 1$\\
+4) $b^ma^l$, взяв $i = 2$ по лемме о накачке получаем, что $a^{p}b^{p+k}a^{p+n}b^p \in L$. Получаем противоречие, так как $k \geq 1$.
+
+Значит $L \notin \CFL$
+
+\end{document}

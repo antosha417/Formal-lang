@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%date{05 октября 2016 г.}
+\let\ra\rightarrow
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\o\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Задача 1.}
+Левый и правый разбор в данном случае совпадают, так как грамматика однозначна и в словах из цепочки вывода встречается не более одного нетерминала.
+
+\begin{tikzpicture}
+	\node {$E$} %root
+		child{ node   {$T$}
+		 	child{ node {$F$}
+				child{ node{$($} }
+				child{ node{$E$} 
+					child{ node{$T$}
+						child{ node{$F$}
+							child{ node{$($}}
+							child{ node{$E$}
+								child{ node{$T$}
+									child{ node{$F$}
+										child{ node{$a$} }									
+									}								
+								}			
+							}
+							child{ node{$)$}}
+						}
+					}
+				}
+				child{ node{$)$} }			
+			}
+	};
+\end{tikzpicture}
+
+
+\section*{Задача 2.}
+\noindent Вычислим функцию First для каждого нетерминала.\\
+\begin{tabular}{|c||c|}
+\hline
+&$S$ \\
+\hline
+$F_0$ & $\{\epsilon\}$  \\
+$F_1$ & $\{\epsilon, 0, 1\}$ \\
+$F_2$ & $\{\epsilon, 0, 1\}$ \\
+\hline
+\end{tabular}\\
+
+\noindent Вычислим функцию Follow для каждого нетерминала.\\
+\begin{tabular}{|c||c|}
+\hline
+&$S$ \\
+\hline
+$F_0$ & $\varnothing$  \\
+$F_1$ & $\varnothing$ \\
+\hline
+\end{tabular}\\
+
+\noindent Построим таблицу для детерминированного левого анализатора.\\
+\begin{tabular}{|c||c|c|c|}
+\hline
+&$0$ &$1$ &$\$$\\
+\hline
+$S$ & $0S$ & $1S$ &$\epsilon$ \\
+\hline
+\end{tabular}\\
+
+\noindent По таблице построим детерминированный левый анализатор.\\
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,every node/.style={text centered},initial text=]
+
+	\node [state, initial] (q_0) {$q_0$};
+	\path[->]
+		
+		(q_0) edge [in=30,out=150,loop] node[align=center] {$0,0 /\epsilon$\\$1,1 /\epsilon$} (q_0)
+			  edge [in=-30,out=-150,loop] node[below,align=center] {$0,S/0S$\\$1,S/1S$\\$\$, S/\epsilon$} (q_0)
+
+			  
+;\end{tikzpicture}
+
+\section*{Задача 4.}
+\noindent \textbf{Теорема:} \\
+Грамматика является $LL(k)$-грамматикой тогда и только тогда, когда для любых двух правил $A \ra \beta, A \ra \gamma$, $FIRST_k(\gamma\alpha)\cap FIRST_k(\beta\alpha) = \varnothing $ для таких $\alpha$, что $ S \Rightarrow^{*}_l wA\alpha$.
+
+Допустим, что заданная грамматика $LL(1)$. Рассмотрим правило $S \ra bAba.$ Тогда так как $A \ra b$ и $A \ra \epsilon$, то по теореме\\ $FIRST(bba) \cap FIRST(\epsilon ba) = \varnothing$, что не так, так как\\ $FIRST(bba) \cap FIRST(\epsilon ba) = \{b\}$.\\
+Значит заданная грамматика не является $LL(1)$.
+
+Рассмотрим сентенциальные цепочки выводимые из $S$:\\ $\{aAaa, bAba, abaa, aaa, bbba, bba\}$. Проверим, что для каждой выполнена теорема. Для первой: $FIRST_2(baa) \cap FIRST_2(\epsilon aa) = \varnothing$, для второй $FIRST_2(bba) \cap FIRST_2(\epsilon ba) = \varnothing$. В остальных цепочках нет нетерминалов, то есть они не подходят под условие теоремы.\\
+Значит теорема выполняется и заданная грамматика $LL-2$.\\
+
+
+Вычислим $FIRST_2$ для каждого нетерминала:\\
+\begin{tabular}{|c||c|c|}
+\hline
+&$S$ &$A$\\
+\hline
+$F_0$ & $\varnothing$  & $\{b, \eps\}$\\
+$F_1$ & $\{ab, aa, bb\}$  & $\{b, \eps\}$\\
+$F_2$ & $\{ab, aa, bb\}$  & $\{b, \eps\}$\\
+\hline
+\end{tabular}\\
+
+Вычислим $FOLLOW_2$ для каждого нетерминала:\\
+\begin{tabular}{|c||c|c|}
+\hline
+&$S$ &$A$\\
+\hline
+$F_0$ & $\varnothing$  & $\varnothing$\\
+$F_1$ & $\varnothing$  & $\{aa, ba\}$\\
+$F_2$ & $\varnothing$  & $\{aa, ba\}$\\
+
+\hline
+\end{tabular}\\
+
+\end{document}

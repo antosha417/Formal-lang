@@ -1,0 +1,244 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}        % Кодировка входного документа;
+                                    % при необходимости, вместо cp1251
+                                    % можно указать cp866 (Alt-кодировка
+                                    % DOS) или koi8-r.
+
+\usepackage[english,russian]{babel} % Включение русификации, русских и
+                                    % английских стилей и переносов
+%%\usepackage{a4}
+%%\usepackage{moreverb}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,amsbsy,amstext,amscd,amsxtra,multicol}
+\usepackage{indentfirst}
+\usepackage{verbatim}
+\usepackage{tikz} %Рисование автоматов
+\usetikzlibrary{automata,positioning}
+\usepackage{multicol} %Несколько колонок
+\usepackage{graphicx}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\usepackage[stable]{footmisc}
+
+%% \voffset-5mm
+%% \def\baselinestretch{1.44}
+\renewcommand{\theequation}{\arabic{equation}}
+\def\hm#1{#1\nobreak\discretionary{}{\hbox{$#1$}}{}}
+\newtheorem{Lemma}{Лемма}
+\newtheorem{Remark}{Замечание}
+%%\newtheorem{Def}{Определение}
+\newtheorem{Claim}{Утверждение}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Theorem}{Теорема}
+\theoremstyle{definition}
+\newtheorem{Example}{Пример}
+\newtheorem*{known}{Теорема}
+\def\proofname{Доказательство}
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+
+%% \newenvironment{Example} % имя окружения
+%% {\par\noindent{\bf Пример.}} % команды для \begin
+%% {\hfill$\scriptstyle\qed$} % команды для \end
+
+
+
+
+
+
+%\date{22 июня 2011 г.}
+\let\leq\leqslant
+\let\geq\geqslant
+\def\MT{\mathrm{MT}}
+%Обозначения ``ажуром''
+\def\BB{\mathbb B}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\SS{\mathbb S}
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+%date{05 октября 2016 г.}
+\let\ra\rightarrow
+%греческие буквы
+\let\epsilon\varepsilon
+\let\es\emptyset
+\let\eps\varepsilon
+\let\al\alpha
+\let\sg\sigma
+\let\ga\gamma
+\let\ph\varphi
+\let\o\omega
+\let\ld\lambda
+\let\Ld\Lambda
+\let\vk\varkappa
+\let\Om\Omega
+\def\abstractname{}
+
+\def\R{{\cal R}}
+\def\A{{\cal A}}
+\def\B{{\cal B}}
+\def\C{{\cal C}}
+\def\D{{\cal D}}
+\def\F{{\cal F}}
+\let\w\omega
+
+%классы сложности
+\def\REG{{\mathsf{REG}}}
+\def\CFL{{\mathsf{CFL}}}
+\newcounter{problem}
+\newcounter{uproblem}
+\newcounter{subproblem}
+\def\pr{\medskip\noindent\stepcounter{problem}{\bf \theproblem .  }\setcounter{subproblem}{0} }
+\def\prp{\medskip\noindent\stepcounter{problem}{\bf Задача \theproblem .  }\setcounter{subproblem}{0} }
+\def\prstar{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^*$ .  }\setcounter{subproblem}{0} }
+\def\prdag{\medskip\noindent\stepcounter{problem}{\bf Задача $\theproblem^\dagger$ .  }\setcounter{subproblem}{0} }
+\def\upr{\medskip\noindent\stepcounter{uproblem}{\bf Упражнение \theuproblem .  }\setcounter{subproblem}{0} }
+%\def\prp{\vspace{5pt}\stepcounter{problem}{\bf Задача \theproblem .  } }
+%\def\prs{\vspace{5pt}\stepcounter{problem}{\bf \theproblem .*   }
+\def\prsub{\medskip\noindent\stepcounter{subproblem}{\rm \thesubproblem .  } }
+%прочее
+\def\quotient{\backslash\negthickspace\sim}
+\begin{document}
+\begin{center} {\LARGE Ковальков Антон 577гр} \end{center}
+\section*{Задача 1.} 
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto,every node/.style={text centered},initial text=]
+
+	\node [state, initial] (q_0) {$q_0$};
+	\node [state, accepting] (q_1) [right = 3cm of q_0] {$q_1$};
+	\node [state] (q_2) [right = 3.5cm of q_1] {$q_2$};
+	\node [state, accepting] (q_3) [right = 3.5cm of q_2] {$q_3$};
+	\path[->]
+		
+		(q_0) edge [in=30,out=150,loop] node[align=center] {$a, \epsilon/a$\\$b, \epsilon /b$} (q_0)
+			  edge node {$c, \epsilon/\epsilon$} (q_1)
+			  
+		(q_1) edge [in=30,out=150,loop] node[align=center] {$ a,a/\epsilon$\\$b, b/\eps$} (q_1)
+			  edge node {$\eps, Z_0/Z_0$} (q_2)
+			  edge [in=-140,out=-40] node[below, align=center] {$ a,b/\epsilon$\\$b, a/\eps$} (q_3)
+
+		(q_2) edge node[align=center] {$a, \eps/\eps$\\$b, \epsilon/\eps$} (q_3)
+
+		(q_3) edge [in=30,out=150,loop] node[align=center] {$a, \eps/\eps$\\$b, \epsilon/\eps$} (q_3)
+
+			  
+;\end{tikzpicture}
+
+	Если $x \neq y^R$, то рассмотрим варианты слова $w\in L$:
+	
+	1. $|x|<|y|$ и $x$ является суффиксом $y^R$. Тогда, обработав префикс $w$ длины $2|x|+1$, автомат перейдет в состояние $q_1$, далее по пустому слову и $Z_0$ на стеке перейдет в состояние $q_2$ и обработает все оставшиеся символы из входа.
+	
+	2. $|x|>|y|$ и $y^R$ является префиксом $x$. Тогда после обработки всего слова, автомат окажется в состоянии $q_1$ с непустым стеком, в котором будет находиться суффикс $x$.
+	
+	3. $x$ и $y$  имеют произвольную длину и на общем отрезке длины есть позиция $i\ : x[i] \neq y [ |x| - i - 1 ] $. Тогда, обработав часть слова до $|x| - i - 1$  позиции, автомат окажется в состоянии $q_1$, прочитает символ со входа и противоположный символ со стека и перейдет в завершающее состояние $q_3$, в котором обработает оставшуюся часть слова.
+
+	Если $x = y^R$, то обработав все слово, автомат окажется в состоянии $q_1$, по пустому слову и символу $Z$ на стеке перейдет в непринимающее состояние $q_2$ и на этом закончит работу.
+%\section*{Задача 2.}
+%Пусть $\A$ -- МП автомат принимающий по допускающему состоянию, распознающий язык $L$. Найдём все %состояния $Q$ из которых достижимы допускающие состояния. Сделаем их допускающими. Если на слове $\o$ 
+%автомат закончил работу в состоянии $Q$, то существует 
+\section*{Задача 3.}
+1) Удалим из языка бесплодные символы:\\
+\hspace*{1,5cm}$V_0 = \{a, b, \eps\}$ \\
+\hspace*{0,5cm}Так как $A \ra \eps, B \ra \eps, C \ra \eps\ \eps \in V_0$, то:\\
+\hspace*{1,5cm}$V_1 = \{a, b, \eps\, A, B, C\}$\\
+\hspace*{0,5cm}Так как $S \ra A, F \ra aBaaCbA, E \ra A, \{a,b,A,B,C\} \subset V_1$, то:\\
+\hspace*{1,5cm}$V_2 = \{a, b, \eps\, A, B, C, S, F, E\}$\\
+\hspace*{1,5cm}$V_3 = \{a, b, \eps\, A, B, C, S, F, E\}$\\
+\hspace*{0,5cm}Получаем грамматику:
+\vspace{-3ex}
+\begin{multicols}{2}
+	\begin{align*}
+		S &\to A \mid B \mid C \mid E \\
+		A &\to C  \mid aABC \mid \eps\\
+		B &\to bABa \eps\\
+	\end{align*}
+
+	\begin{align*}
+		C &\to BaAbC \mid \eps\\
+		F &\to aBaaCbA\\
+		E &\to A\\			
+	\end{align*}	
+\end{multicols}
+\vspace{-2ex}
+2) Удалим из языка недостижимые символы:\\
+\hspace*{1,5cm}$V_0 = \{S\}$\\
+\hspace*{1,5cm}$V_1 = \{S, A, B, C, E\}$\\
+\hspace*{1,5cm}$V_2 = \{S, A, B, C, E\}$\\
+
+Получаем грамматику:
+\vspace{-3ex}
+\begin{multicols}{2}
+	\begin{align*}
+		S &\to A \mid B \mid C \mid E \\
+		A &\to C  \mid aABC \mid \eps\\
+		B &\to bABa \eps\\
+		C &\to BaAbC \mid \eps\\
+		E &\to A\\		
+	\end{align*}
+\end{multicols}
+\vspace{-2ex}
+
+Это и будет приведённая грамматика.
+
+\section*{Задача 4.}
+Чтобы вывести слово длины $n$ из НФХ-грамматики, так как все правила неукорачивающие,нужно из стартового символа вывести $n$ нетерминалов, и из каждого нетерминала вывести терминал. На каждом шаге вывода $n$ нетерминалов их количество будет возрастать на единицу. То есть $n$ нетерминалов будет выведено за $n-1$ операцию. Далее необходимо заменить каждый из этих нетерминалов на терминальный символ. Это займёт $n$ операций. Получаем $2n-1$ операция необходима для вывода слова.
+\section*{Задача 5.}
+1) Удалим из грамматики $\epsilon$-продукции.\\
+Найдём $\epsilon$-порождающие символы:\\
+$V_0 = \{A\}$\\
+$V_1 = \{A, B, C\}$\\
+$V_2 = \{A,B,C,S\}$\\
+$V_3 = \{A,B,C,S\}$\\
+Рассмотрим правило $S \ra ABC$. Так как $\{A,B,C\} \subset V_3$, то получаем правила:\\
+\hspace*{0,5cm}$S \ra A \mid B \mid C \mid AB \mid AC \mid BC \mid ABC$.\\
+Из правила $S \ra SABC$ получим:\\
+\hspace*{0,5cm}$S \ra A \mid B \mid C \mid SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC$.\\
+Из правила $A \ra aCB$ получим:\\
+\hspace*{0,5cm}$A \ra a \mid aC \mid aB \mid aCB$.\\
+Из правила $C \ra aBbA$ получим:\\
+\hspace*{0,5cm}$C \ra ab \mid aBb \mid abA \mid aBbA$.\\
+\hspace*{0,5cm} Таким образом получим грамматику $G_1$ без $\epsilon$-продукций:\\
+$S \ra A \mid B \mid C \mid SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC$\\
+$A \ra S \mid B \mid a \mid aC \mid aB \mid aCB$\\
+$B \ra ab \mid b \mid A$\\
+$C \ra A \mid B \mid ab \mid aBb \mid abA \mid aBbA$\\
+
+Так как исходная грамматика порождала пустое слово, то добавим новый начальный символ $S_1$ и два правила: $S_1 \ra S\ |\ \epsilon$. Получим грамматику: \\
+$S_1 \ra S\ |\ \epsilon$\\
+$S \ra A \mid B \mid C \mid SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC$\\
+$A \ra S \mid B \mid a \mid aC \mid aB \mid aCB$\\
+$B \ra ab \mid b \mid A$\\
+$C \ra A \mid B \mid ab \mid aBb \mid abA \mid aBbA$\\
+
+2) Удалим из грамматики цепные продукции.\\
+Найдём цепные пары:\\
+$V_0 = \{(S,S), (A,A), (B,B), (C,C), (S_1, S_1)\}$\\
+$V_1 = V_0 \cup \{(S,A), (S,B), (S,C), (A,S), (A,B), (B,A), (C,A), (C,B), (S_1, S)\}$\\
+$V_2 = V_1 \cup \{(A,C), (B,S), (C,S), (S_1,A), (S_1,B), (S_1,C)\}$\\
+$V_3 = V_2 \cup \{(B,C)\}$\\
+$V_4 = V_3$\\
+
+Построим грамматику без цепных продукций:\\
+\hspace*{0,5cm}$S_1 \ra SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC \mid a \mid aC \mid aB \mid aCB \mid b \mid ab \mid aBb \mid abA \mid aBbA \mid \epsilon$\\
+\hspace*{0,5cm}$S \ra SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC \mid a \mid aC \mid aB \mid aCB \mid ab \mid b \mid aBb \mid abA \mid aBbA$\\
+\hspace*{0,5cm}$A \ra SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC \mid a \mid aC \mid aB \mid aCB \mid ab \mid b \mid aBb \mid abA \mid aBbA$\\
+\hspace*{0,5cm}$B \ra SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC \mid a \mid aC \mid aB \mid aCB \mid ab \mid b \mid aBb \mid abA \mid aBbA$\\
+\hspace*{0,5cm}$C \ra SA \mid SB \mid SC \mid AB \mid AC \mid BC \mid SAB \mid SAC \mid SBC \mid ABC \mid SABC \mid a \mid aC \mid aB \mid aCB \mid ab \mid b \mid aBb \mid abA \mid aBbA$\\
+
+Так как правый части правил у нетерминалов $S, A,B,C$ совпадают, то заменим их нетерминалом $Q$. Получим грамматику:\\
+\hspace*{0,5cm}$S_1 \ra QQ \mid QQQ \mid QQQQ \mid a \mid aQ \mid aQQ \mid b \mid ab \mid aQb \mid abQ \mid aQbQ \mid \epsilon$\\
+\hspace*{0,5cm}$Q \ra QQ \mid QQQ \mid QQQQ \mid a \mid aQ \mid aQQ \mid ab \mid b \mid aQb \mid abQ \mid aQbQ$\\\\
+Бесплодных символов нет, так как $S_1 \ra a$ и $Q \ra a$.\\
+Недостижимых символов нет, так как $S_1 \ra QQ$.\\
+
+Построим по получившейся грамматике НФХ:\\
+\hspace*{0,5cm}$S_1 \ra QQ \mid Q_2Q \mid Q_2Q_2 \mid a \mid AQ \mid AQ_2 \mid b \mid AB \mid A_QB \mid AB_Q \mid A_QB_Q \mid \epsilon$\\
+\hspace*{0,5cm}$Q \ra QQ \mid Q_2Q \mid Q_2Q_2 \mid a \mid AQ \mid AQ_2 \mid AB \mid b \mid A_QB \mid AB_Q \mid A_QB_Q$\\
+\hspace*{0,5cm}$A \ra a$\\
+\hspace*{0,5cm}$B \ra b$\\
+\hspace*{0,5cm}$Q_2 \ra QQ$\\
+\hspace*{0,5cm}$A_Q \ra AQ$\\
+\hspace*{0,5cm}$B_Q \ra BQ$\\
+$\subset$
+
+\end{document}
