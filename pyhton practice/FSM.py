@@ -2,6 +2,7 @@ from itertools import product
 
 
 SIGMA = ['a', 'b']
+EPSILON = '1'
 
 
 class FSM:
