@@ -1,10 +1,10 @@
-from FSM import FSM, concat, add, iteration, intersect, shortest_word, SIGMA, dfsm
+from FSM import FSM, concat, add, iteration, intersect, shortest_word, SIGMA, dfsm, EPSILON
 
 
 def fsm_from_expression(expression):
     fsm_stack = []
     for char in expression:
-        if char in SIGMA or char == '1':
+        if char in SIGMA or char == EPSILON:
             fsm = FSM()
             fsm_stack.append(fsm.create(char))
         elif char == '.':
@@ -30,7 +30,7 @@ def natural_notation(reg_expr):
     reg_expr_list = list(reg_expr)
     res = []
     for char in reg_expr_list:
-        if char in SIGMA or char == '1':
+        if char in SIGMA or char == EPSILON:
             res.append(char)
         elif char == '.':
             expr1 = res.pop()
@@ -58,7 +58,7 @@ def reverse_polish_notation(reg_exp):
     res = ''
     stack = []
     for char in reg_exp:
-        if char in SIGMA or char == '1' or char == '*':
+        if char in SIGMA or char == EPSILON or char == '*':
             res += char
         elif char == ')':
             while stack[-1] != '(':
